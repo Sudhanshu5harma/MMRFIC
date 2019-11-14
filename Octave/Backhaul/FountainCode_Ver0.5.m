@@ -6,6 +6,7 @@
 %% Version History (Reverse chronological order please)
 %%-------------------------------------------------------
 %%  Ver     Date        Author          Comments
+%%  0.5     Nov 19     Gana               Fix - Codematrix Errors, plotting and checking 
 %%  0.4     Nov 19     Sudhanshu Sharma   Introducing Channel Error and calculating bit Error
 %%  0.3     Nov 19     Sudhanshu Sharma   Minor fixes in function and implementation
 %%  0.2     Oct 19     Sudhanshu Sharma   Encoding and decoding using Gaussian Elimination 
@@ -21,7 +22,7 @@ clear all; close all ; clc;
 pkg load communications
 ##rand('seed',123);
 ##randn('seed',456);
-code_matrix =[
+code_matrix = [
 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 
 0, 0, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 
 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 
@@ -462,11 +463,11 @@ code_matrix =[
 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 
 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 
 1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 
-];
+2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0,];
+
 %% Converting Octal matrix into bits 
-ConversionM = dec2bits(code_matrix,3); 
-code_matrixGF = reshape(ConversionM,441,63); 
+ConversionM = dec2bits(code_matrix',3); 
+code_matrixGF = transpose(reshape(ConversionM,63,441)); 
 
 ##input = round(rand(1,63)); 
 input = [0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
@@ -476,34 +477,43 @@ encoded_bits = mod(en,2); % converting encoded bits in GF(2)
 ChannelErrPro=[0.00001 0.0001 0.001 0.01 0.1]; %starting probability 
 PlotMatrix=[];
 i=0;
+numExpts = 1000;
+
 %% Introducing Channel Error 
-for BlockSize= 70:20:441
+for BlockSize= 100:40:300
+  disp(['Running sim for block size: ',num2str(BlockSize)]);
   j=1;
   i=i+1;
   PlotMatrix(i,1)=BlockSize;
   RandomRows= randi([1 441],1,BlockSize);% select random rows
   CodeMatrixRandom=code_matrixGF(RandomRows,:);%select random row from code Matrix and give it to the Gaussian B function
   for ErrorPro = 1 : length(ChannelErrPro) 
+    disp(['   * Running sim for Err Prob: ',num2str(ChannelErrPro(ErrorPro))]);
     BitDifferenceSum=0;
     AvgBitError=0;
-      for numberoftimes=1:1000
+      for numberoftimes=1:numExpts
         ChannelOutput = bsc(encoded_bits,ChannelErrPro(ErrorPro));
         ChannelRandombits=ChannelOutput(RandomRows,:); % select random bits and give it to gaussian Elimi to make matrix
         GaussianDecoderOutput=GaussianB(CodeMatrixRandom,ChannelRandombits); % calling function Gaussian Elimination-Binary       
         BitDifference = sum(abs(input - GaussianDecoderOutput));
         BitDifferenceSum=BitDifference + BitDifferenceSum;         
       end      
-    AvgBitError=BitDifferenceSum/1000;
+    AvgBitError=BitDifferenceSum/numExpts/63;
     j=j+1;
     PlotMatrix(i,j) =  AvgBitError;
 end
 end
-plot(PlotMatrix(:,1),PlotMatrix(:,2),'b'); hold on;
-plot(PlotMatrix(:,1),PlotMatrix(:,3),'g'); hold on;
-plot(PlotMatrix(:,1),PlotMatrix(:,4),'r'); hold on;
-plot(PlotMatrix(:,1),PlotMatrix(:,5),'k'); hold on;
-plot(PlotMatrix(:,1),PlotMatrix(:,6),'y'); hold on;
-xlabel('Block size');
-ylabel('Number of error bits');
-title('Bit error curve');
-legend('0.00001','0.0001','0.001','0.01','0.1');
+%semilogy(PlotMatrix(:,1),PlotMatrix(:,2),'b'); hold on;
+%semilogy(PlotMatrix(:,1),PlotMatrix(:,3),'g'); hold on;
+%semilogy(PlotMatrix(:,1),PlotMatrix(:,4),'r'); hold on;
+%semilogy(PlotMatrix(:,1),PlotMatrix(:,5),'k'); hold on;
+%semilogy(PlotMatrix(:,1),PlotMatrix(:,6),'y'); hold on;
+%xlabel('Block size');
+
+semilogy(ChannelErrPro,1e-10+PlotMatrix(:,2:end)); grid
+axis([1e-4 1e-1 1e-5 1e-1]);
+legend(num2str(PlotMatrix(:,1)));
+xlabel('Channel Error Prob.');
+ylabel('Bit Error Rate (BER)');
+%title('Bit error curve');
+%legend('0.00001','0.0001','0.001','0.01','0.1');
