@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MMRFIC Document template header v0.1
+%%
+%% (C) MMRFIC Technology Pvt. L:td., Bangalore.
+%%
+%%  NOTE:
+%%  This header needs to be kep as it is for all LaTeX documents.
+%%  If you have any comments, please send them to gana@mmrfic.com 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Header starts from here  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+\documentclass[12pt,a4paper,onecolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+\author{MMRFIC Technology Pvt. Ltd., Bangalore}
+\title{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage}
+
+%% Header and footer style
+\lhead{}
+%\chead{}
+%\rhead{}
+%\lfoot{}
+%\cfoot{}
+%\rfoot{}
+
+\fancyhead{}  % Cleal default format
+\rhead{MMRFIC Confidential: NDA Required}
+\fancyfoot{}  % Cleal default format
+%\fancyfoot[LE,RO]{\thepage}           
+%\fancyfoot[RO]{Page \thepage\ of\  \pageref{\LastPage}}           % page number
+\fancyfoot[RO]{Page \thepage}           
+% page number in "outer"positionfooterline
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.6pt}
+\setcounter{figure}{0}
+\makeatletter
+\renewcommand{\thefigure}{\@arabic\c@figure}
+\makeatother 
+
+%% Watermark
+%\usepackage[firstpage]{draftwatermark}
+\usepackage{draftwatermark}
+\SetWatermarkFontSize{10cm}
+\SetWatermarkColor[rgb]{100}
+%\SetWatermarkText{VER 0.1}
+\SetWatermarkText{VER 0.1}
+\SetWatermarkLightness{0.5}
+
+%% Other misc used in the project
+\usepackage{longtable}
+%% Header ends from here  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%% 
+%% NOTE2:
+%% After copying the header lines, do not change the order of the lines.
+%% Make changes only to title of the document, Watermark text (including the 
+%% version number of the document, and rhead{} content. Allowed rhead{} lines 
+%% are  (i) \rhead{MMRFIC Confidential: NDA Required}, (ii) \rhead{MMRFIC 
+%% Tutorial}, (iii) \rheaf{}
+
+
+\begin{document}
+%\title{User Guide for RF Driver Board V0.2}
+\maketitle
+\vfill
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Ver. & Author(s) & Date & Comments \\
+\hline \hline
+%%% Enter version history here
+\hline
+\end{tabular}
+\caption{Version History}
+\end{center}
+\end{table}
+\newpage
+\tableofcontents
+\newpage
+\end{document}
