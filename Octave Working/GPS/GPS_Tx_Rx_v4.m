@@ -66,7 +66,7 @@ end
 numOut = length(TxData) + length(goldCode2) - 1;
 payloadFFT = fft(TxData,numOut);
 goldCodeFFT = conj(fft(goldCode2,numOut));
-crossCorr_FFT = abs(ifft(payloadFFT .* goldCodeFFT));
+crossCorr_FFT = ifft(payloadFFT .* goldCodeFFT);#abs(ifft(payloadFFT .* goldCodeFFT));
 corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
 corr_time = corr_time(1:length(payload1));
 if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
