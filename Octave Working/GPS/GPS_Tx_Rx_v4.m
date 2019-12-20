@@ -33,13 +33,13 @@ payload3 = 2*payload3 - 1;            %BPSK Modulation
 %% PN code generation
                        
 % initial sequence is taken from IRNSS document
-goldCode1 = generateGoldCode_1(935,239,codeLength,numBits);
+goldCode1 = generateGoldCode(935,239,codeLength,numBits);
 goldCode1 = 2*goldCode1-1;                        % Assign code to 1 to 1 and -1 to 0
 
-goldCode2 = generateGoldCode_1(38,381,codeLength,numBits);
+goldCode2 = generateGoldCode(38,381,codeLength,numBits);
 goldCode2 = 2*goldCode2-1;
 
-goldCode3 = generateGoldCode_1(564,561,codeLength,numBits);
+goldCode3 = generateGoldCode(564,561,codeLength,numBits);
 goldCode3 = 2*goldCode3-1;
 
 %% At transmitter part 
