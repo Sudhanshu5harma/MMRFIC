@@ -59,24 +59,25 @@ outputData = crossCorr(codeLength:codeLength:end)/codeLength;
 if (abs(sum((round(outputData)) - payload2)) < 1e-3)
     disp('Payload data detected in Time domain.....')
 end 
-%% Frequency domain 
+%% Frequency domain   
 
-numOut = length(TxData) + length(goldCode2) - 1;
-payloadFFT = fft(TxData,numOut);
-goldCodeFFT = conj(fft(goldCode2,numOut));
-crossCorr_FFT = ifft(payloadFFT .* goldCodeFFT); #abs(ifft(payloadFFT .* goldCodeFFT));
-corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
-corr_time = corr_time(1:length(payload1));
-##starting =1;
-##crossCorr_temp=0 ;
-##for val = 1023:1023:numOut
-##  crossCorr_FFT = ifft(payloadFFT(1,starting:val) .* fft(goldCode2));
-##  starting = starting +1023;
-##endfor
-##crossCorr_temp = crossCorr_temp + crossCorr_FFT;
-##corr_time = crossCorr_temp(1:codeLength:end)/codeLength;
+##numOut = length(TxData) + length(goldCode2) - 1;
+##payloadFFT = fft(TxData,numOut);
+##goldCodeFFT = conj(fft(goldCode2,numOut));
+##crossCorr_FFT = ifft(payloadFFT .* goldCodeFFT); #abs(ifft(payloadFFT .* goldCodeFFT));
+##corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
 ##corr_time = corr_time(1:length(payload1));
-if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
-    disp('Payload data detected in Frequency domain.....')
-end 
+starting =1;
+crossCorr_temp=0 ;
+for val = 1:1023:length(TxData)
+  payloadFFT = fft(TxData(1,starting:val))
+  crossCorr_FFT = ifft(payloadFFT) .* conj(fft(goldCode2)));
+  starting = starting +1023;
+  crossCorr_temp = crossCorr_temp + crossCorr_FFT;
+endfor
+##corr_time = crossCorr_temp(1:codeLength:end)/codeLength;
+##corr_time = corr_time(1:end);
+##if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
+##    disp('Payload data detected in Frequency domain.....')
+##end 
 toc
