@@ -75,8 +75,8 @@ for val = 1:1023:length(TxData)
   starting = starting +1023;
   crossCorr_temp = crossCorr_temp + crossCorr_FFT;
 endfor
-##corr_time = crossCorr_temp(1:codeLength:end)/codeLength;
-##corr_time = corr_time(1:end);
+corr_time = crossCorr_temp(1,1:codeLength:end)/codeLength;
+corr_time = corr_time(1:end);
 ##if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
 ##    disp('Payload data detected in Frequency domain.....')
 ##end 
