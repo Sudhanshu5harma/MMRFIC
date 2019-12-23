@@ -70,8 +70,8 @@ end
 starting =1;
 crossCorr_temp=0 ;
 for val = 1:1023:length(TxData)
-  payloadFFT = fft(TxData(1,starting:val))
-  crossCorr_FFT = ifft(payloadFFT) .* conj(fft(goldCode2)));
+  payloadFFT = fft(TxData(1,starting:val));
+  crossCorr_FFT = ifft((payloadFFT) .* conj(fft(goldCode2)));
   starting = starting +1023;
   crossCorr_temp = crossCorr_temp + crossCorr_FFT;
 endfor
