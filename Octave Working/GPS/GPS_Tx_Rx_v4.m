@@ -13,7 +13,7 @@
 clc;
 clear all;
 close all;
-
+pkg load communications   
 tic
 %% Initial params
 numBits = 10;                        % LFSR length
@@ -27,9 +27,7 @@ payload1 = 2*payload1 - 1;            %BPSK Modulation
 payload2 = 2*payload2 - 1;            %BPSK Modulation 
 payload3 = 2*payload3 - 1;            %BPSK Modulation 
 
-## payload1 = ones(1,10);
-## payload2 = ones(1,10)*2;
-## payload3 = ones(1,10)*3;
+
 %% PN code generation
                        
 % initial sequence is taken from IRNSS document
@@ -69,6 +67,15 @@ goldCodeFFT = conj(fft(goldCode2,numOut));
 crossCorr_FFT = ifft(payloadFFT .* goldCodeFFT); #abs(ifft(payloadFFT .* goldCodeFFT));
 corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
 corr_time = corr_time(1:length(payload1));
+##starting =1;
+##crossCorr_temp=0 ;
+##for val = 1023:1023:numOut
+##  crossCorr_FFT = ifft(payloadFFT(1,starting:val) .* fft(goldCode2));
+##  starting = starting +1023;
+##endfor
+##crossCorr_temp = crossCorr_temp + crossCorr_FFT;
+##corr_time = crossCorr_temp(1:codeLength:end)/codeLength;
+##corr_time = corr_time(1:length(payload1));
 if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
     disp('Payload data detected in Frequency domain.....')
 end 
