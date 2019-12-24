@@ -68,15 +68,16 @@ end
 ##corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
 ##corr_time = corr_time(1:length(payload1));
 starting =1;
-crossCorr_temp=0 ;
-for val = 1:1023:length(TxData)
-  payloadFFT = fft(TxData(1,starting:val));
-  crossCorr_FFT = ifft((payloadFFT) .* conj(fft(goldCode2)));
+crossCorr_temp=0;#[zeros(1,100)] ;
+goldCodeFFT = conj(fft(goldCode2));
+for val = 1023:1023:length(TxData)
+  payloadFFT = fft(TxData(starting:val));
+  crossCorr_FFT = ifft((payloadFFT) .*goldCodeFFT);
   starting = starting +1023;
   crossCorr_temp = crossCorr_temp + crossCorr_FFT;
 endfor
-corr_time = crossCorr_temp(1,1:codeLength:end)/codeLength;
-corr_time = corr_time(1:end);
+##corr_time = crossCorr_temp(1:end)/codeLength;
+##corr_time = corr_time(1:end);
 ##if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
 ##    disp('Payload data detected in Frequency domain.....')
 ##end 
