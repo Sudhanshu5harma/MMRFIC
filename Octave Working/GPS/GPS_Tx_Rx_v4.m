@@ -19,9 +19,9 @@ tic
 numBits = 10;                        % LFSR length
 codeLength = 2^numBits-1;           % Spreading code length 
 
-payload1 = 1*(rand(1,100)>0.5);
-payload2 = 1*(rand(1,100)>0.5);
-payload3 = 1*(rand(1,100)>0.5);
+payload1 = 1*(rand(1,10)>0.5);
+payload2 = 1*(rand(1,10)>0.5);
+payload3 = 1*(rand(1,10)>0.5);
 
 payload1 = 2*payload1 - 1;            %BPSK Modulation 
 payload2 = 2*payload2 - 1;            %BPSK Modulation 
@@ -71,13 +71,13 @@ starting =1;
 i=0;
 crossCorr_temp=0;#[zeros(1,100)] ;
 goldCodeFFT = conj(fft(goldCode2));
-for val = 1023:1023:length(TxData)
+for val = 1023:1023:1023#length(TxData)
   payloadFFT = fft(TxData(starting:val));
   crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
   corr_time = crossCorr_FFT(1:end)/codeLength;
   starting = starting +1023;
   i=i+1;
-  crossCorr_temp(1,i) = corr_time;
+##  crossCorr_temp(1,i) = corr_time;
 endfor
 ##corr_time = crossCorr_temp(1:end)/codeLength;
 ##corr_time = corr_time(1:end);
