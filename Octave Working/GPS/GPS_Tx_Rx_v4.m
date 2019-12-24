@@ -68,13 +68,16 @@ end
 ##corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
 ##corr_time = corr_time(1:length(payload1));
 starting =1;
+i=0;
 crossCorr_temp=0;#[zeros(1,100)] ;
 goldCodeFFT = conj(fft(goldCode2));
 for val = 1023:1023:length(TxData)
   payloadFFT = fft(TxData(starting:val));
-  crossCorr_FFT = ifft((payloadFFT) .*goldCodeFFT);
+  crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
+  corr_time = crossCorr_FFT(1:end)/codeLength;
   starting = starting +1023;
-  crossCorr_temp = crossCorr_temp + crossCorr_FFT;
+  i=i+1;
+  crossCorr_temp(1,i) = corr_time;
 endfor
 ##corr_time = crossCorr_temp(1:end)/codeLength;
 ##corr_time = corr_time(1:end);
