@@ -78,7 +78,7 @@ for val = 1023:1023:1023%length(TxData)
   starting = starting +1023;
   i=i+1;
 %  crossCorr_temp(1,i) = corr_time;
-endfor
+end
 %corr_time = crossCorr_temp(1:end)/codeLength;
 %corr_time = corr_time(1:end);
 %if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
