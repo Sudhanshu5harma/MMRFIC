@@ -1,6 +1,4 @@
 clc;
-rand('seed',123);
-randn('seed',456);
 clear all;
 close all;   
 tic
@@ -26,20 +24,3 @@ TxData = payloadData1 ;
 %% Time Domain 
 crossCorr = xcorr2(TxData,goldCode1);              
 outputData = crossCorr(codeLength:codeLength:end)/codeLength;
-
-Timedomain = outputData - payload1 ;
-%% Frequency Domain
-starting = 1;
-i=0;
-crossCorr_temp=0;%[zeros(1,100)] ;
-goldCodeFFT = conj(fft(goldCode2));
-for val = 1023:1023:1023%length(TxData)
-  payloadFFT = fft(TxData(starting:val));
-  crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
-  corr_time = crossCorr_FFT(1:end)/codeLength;
-  starting = starting +1023;
-  i=i+1;
-%  crossCorr_temp(1,i) = corr_time;
-end
-
-toc
