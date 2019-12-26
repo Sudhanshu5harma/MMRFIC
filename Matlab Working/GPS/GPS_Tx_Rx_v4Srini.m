@@ -13,21 +13,23 @@
 clc;
 clear all;
 close all;
-pkg load communications   
+
 tic
 %% Initial params
 numBits = 10;                        % LFSR length
 codeLength = 2^numBits-1;           % Spreading code length 
 
-payload1 = 1*(rand(1,10)>0.5);
-payload2 = 1*(rand(1,10)>0.5);
-payload3 = 1*(rand(1,10)>0.5);
+payload1 = 1*(rand(1,100)>0.5);
+payload2 = 1*(rand(1,100)>0.5);
+payload3 = 1*(rand(1,100)>0.5);
 
 payload1 = 2*payload1 - 1;            %BPSK Modulation 
 payload2 = 2*payload2 - 1;            %BPSK Modulation 
 payload3 = 2*payload3 - 1;            %BPSK Modulation 
 
-
+%  payload1 = ones(1,10);
+%  payload2 = ones(1,10)*2;
+%  payload3 = ones(1,10)*3;
 %% PN code generation
                        
 % initial sequence is taken from IRNSS document
@@ -59,29 +61,15 @@ outputData = crossCorr(codeLength:codeLength:end)/codeLength;
 if (abs(sum((round(outputData)) - payload2)) < 1e-3)
     disp('Payload data detected in Time domain.....')
 end 
-%% Frequency domain   
+%% Frequency domain 
 
-##numOut = length(TxData) + length(goldCode2) - 1;
-##payloadFFT = fft(TxData,numOut);
-##goldCodeFFT = conj(fft(goldCode2,numOut));
-##crossCorr_FFT = ifft(payloadFFT .* goldCodeFFT); #abs(ifft(payloadFFT .* goldCodeFFT));
-##corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
-##corr_time = corr_time(1:length(payload1));
-starting =1;
-i=0;
-crossCorr_temp=0;#[zeros(1,100)] ;
-goldCodeFFT = conj(fft(goldCode2));
-for val = 1023:1023:1023#length(TxData)
-  payloadFFT = fft(TxData(starting:val));
-  crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
-  corr_time = crossCorr_FFT(1:end)/codeLength;
-  starting = starting +1023;
-  i=i+1;
-##  crossCorr_temp(1,i) = corr_time;
-endfor
-##corr_time = crossCorr_temp(1:end)/codeLength;
-##corr_time = corr_time(1:end);
-##if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
-##    disp('Payload data detected in Frequency domain.....')
-##end 
+numOut = length(TxData) + length(goldCode2) - 1;
+payloadFFT = fft(TxData,numOut);
+goldCodeFFT = conj(fft(goldCode2,numOut));
+crossCorr_FFT = (ifft(payloadFFT .* goldCodeFFT));
+corr_time = crossCorr_FFT(1:codeLength:end)/codeLength;
+corr_time = corr_time(1:length(payload1));
+if (abs(sum((round(corr_time)) - payload2)) < 1e-3)
+    disp('Payload data detected in Frequency domain.....')
+end 
 toc
