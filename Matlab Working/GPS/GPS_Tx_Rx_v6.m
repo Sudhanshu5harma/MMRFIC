@@ -32,7 +32,7 @@ TxData = payloadData1 +payloadData2;
 
 %% Padding random number and finding the value of offset
 
-TxData = [1*(rand(1,100)>0.5) TxData];
+TxData = [1*(rand(1,0)>0.5) TxData];
 padded =  xcorr2(TxData(1:3*codeLength),goldCode1);
 offset = find(abs(padded) > codeLength/2,1);
 offsetval = offset - codeLength;
@@ -64,8 +64,7 @@ for val = (offsetval+1023):1023:length(TxData)
 %       indexvalue = indexN;
 %   else
 %       indexvalue = indexP;
-%   end 
-  
+%   end  
 end
 
 %% Plotting 
