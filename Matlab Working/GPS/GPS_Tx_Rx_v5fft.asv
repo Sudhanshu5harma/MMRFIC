@@ -56,16 +56,15 @@ for val = (offsetval+1023):1023:length(TxData)
   crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
    FrequencyDomain(1,i) =crossCorr_FFT(1)/codeLength; 
    starting = starting +1023;
-   disp(['index value for ' num2str(i) ]);
-%   [valueP,indexP] = max(crossCorr_FFT);
-%   [valueN,indexN] = max(-crossCorr_FFT);
-   i=i+1;
-%   if(valueN>valueP)
-%       indexvalue = indexN;
-%   else
-%       indexvalue = indexP;
-%   end 
-  
+  [valueP,indexP] = max(crossCorr_FFT);
+  [valueN,indexN] = max(-crossCorr_FFT);
+  i=i+1;
+  if(valueN>valueP)
+      indexvalue = indexN;
+  else
+      indexvalue = indexP;
+  end 
+  indexvalue
 end
 
 %% Plotting 
