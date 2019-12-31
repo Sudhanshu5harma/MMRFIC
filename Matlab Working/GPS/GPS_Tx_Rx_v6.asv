@@ -38,7 +38,7 @@ offset = find(abs(padded) > codeLength/2,1);
 offsetval = offset - codeLength;
 
 %% Adding Noise 
-snr = -23;
+snr = 0;
 TxData = awgn(TxData,snr);
 
 %% Calculating Offset 
@@ -83,6 +83,6 @@ for val = (offsetval+1023):1023:length(TxData)
 end
 
 %% Plotting 
-% stem(FrequencyDomain,'b');grid on;
-% hold on ; stem(mod_payload1,'r');
+stem(FrequencyDomain,'b');grid on;
+hold on ; stem(payload1,'r');
 toc
