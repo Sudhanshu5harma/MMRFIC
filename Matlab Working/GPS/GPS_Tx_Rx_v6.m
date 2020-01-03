@@ -38,7 +38,7 @@ offset = find(abs(padded) > codeLength/2,1);
 offsetval = offset - codeLength;
 
 %% Adding Noise 
-snr = -23;
+snr = 10;
 TxData = awgn(TxData,snr);
 
 %% Calculating Offset 
