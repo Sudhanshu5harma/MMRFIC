@@ -47,7 +47,7 @@ for nSV = 1:numSVs
     codeLen = 1023;
     fbMode = ['SV',num2str(svIdArray(nSV))];
     codeOffset = floor(0*rand*MAX_CODE_OFFSET);   % Maximum of 64 code phase
-    freqOffset = MAX_FREQ_OFFSET *(rand-0.5);   % +/- 5K freq offset
+    freqOffset = MAX_FREQ_OFFSET *(rand-0.5)*0;   % +/- 5K freq offset
     
     [code, symbol] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, codeOffset);
     spreadData = kron(symbol,2*payload_OSR-1);
