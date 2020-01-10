@@ -1,4 +1,5 @@
-[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx(1,10,10,0.25);
+SVID = randi(32,5);
+[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx(SVID,10,10,0.25);
 
 %% Adding Noise 
 snr = -10;
