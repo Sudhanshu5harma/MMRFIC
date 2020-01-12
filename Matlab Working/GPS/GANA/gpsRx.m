@@ -1,60 +1,43 @@
-[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx();
+%% Function to create the Tx signal for the given list of SVs
+%%
+%% (C) MMRFIC Technology Pvt. Ltd., Bangalore INDIA
+%%---------------------------------------------------------------
+%% Usage:
+%% function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray, symbol] = gpsTx(svIdArray, numBits, OSR, alpha)
+%%
+%% Version History: (in reverse chronological order please)
+%%
+%% ver  0.1   10-Jan-2020   Sudhanshu             Created
+
+%% changes made:
+%% line 56 gpsTx.m
+%% Sending goldcode with gpsTx()
+%% currently with no codeOffset only with FreqOffsetArray. 
+
+
+[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,symbol] = gpsTx();
 
 %% Adding Noise 
-snr = -10;
-TxData = awgn(txSignal,snr);
+snr = 0;
+txSignal = awgn(txSignal,snr);
 
 %% Reciever 
-
-
-tx = temp2.*exp(J*(-1)*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
+codeLen = 1023;
+OSR = 10;
+Fs = OSR*1e6;
+J = sqrt(-1);
+[lengthtx, numSVs] =size(txSignal);
+RxData = zeros(200,numSVs);
+for nSV = 1:numSVs
+temp2 = txSignal(:,nSV)';
+tx = temp2.*exp(J*(-1)*2*pi*freqOffsetArray(nSV)/Fs*[0:lengthtx-1]);
 tx = real(tx);
 downsamtx = downsample(tx,OSR);
 downsamtx_hfilt = conv(downsamtx,hFilt);
 downsamtx_hfilt = real(downsamtx_hfilt);
-crossCorr = xcorr2(downsamtx_hfilt,symbol);              
+crossCorr = xcorr2(downsamtx_hfilt,symbol(:,1));              
 outputData = crossCorr(codeLen:codeLen:end)/codeLen;
+RxData(:,nSV) = outputData;
 % plot(outputData)
-
-
-
-J = sqrt(-1);
-MAX_CODE_OFFSET = 64;
-MAX_FREQ_OFFSET = 5000;
-Fs = 10*1e6;
-payload_OSR = reshape(repmat(payload,20,1),1,10*20);
-numSVs = length(svIdArray);
-for nSV = 1:numSVs
-    init_g1 = ones(1,10);
-    init_g2 = ones(1,10);
-    codeLen = 1023;
-    fbMode = ['SV',num2str(svIdArray(nSV))];
-    [code, symbol] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, codeOffset);
-    symbolFFT = conj(fft(symbol));
-    temp = TxData((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
-    temp1 = TxData.*exp(-1)*(J*2*pi*freqOffset/Fs*[0:length(temp)-1]);
-    temp2 = conv(downsample(temp1, OSR), hFilt);
-%     spreadData = kron(symbol,2*payload_OSR-1);
-%     temp = conv(upsample(spreadData, OSR), hFilt);
-%     temp1 = temp((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
-%     temp2 = temp1 .* exp(J*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
-%     txSignal(:,nSV) = transpose(temp2);                % make it a column vector
-%     codeOffsetArray(nSV) = codeOffset;
-%     freqOffsetArray(nSV) = freqOffset;
-
-starting = 1+codeOffsetArray(nSV);
-i=1;
-FrequencyDomain=zeros(1,numBits);
-goldCodeFFT = conj(fft(goldCode1));
-for val = (offsetval+1023):1023:length(TxData)
-  payloadFFT = fft(TxData(starting:val));
-  crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
-   FrequencyDomain(1,i) =crossCorr_FFT(1)/codeLength; 
-   starting = starting +1023;
-%   disp(['index value for ' num2str(i) ]);
-%   [valueP,indexP] = max(crossCorr_FFT);
-%   [valueN,indexN] = max(-crossCorr_FFT);
-   i=i+1;
-end
-end  % End of nSV
+end 
 

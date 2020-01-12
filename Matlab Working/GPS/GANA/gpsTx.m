@@ -9,7 +9,7 @@
 %%
 %% ver  0.1   06-Jan-2020   Ganesan, T             Created
 
-function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx(svIdArray, numBits, OSR, alpha)
+function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,symbol] = gpsTx(svIdArray, numBits, OSR, alpha)
 
 if (nargin < 1)
     svIdArray = randi(32,5);    % Random 5 SVs
@@ -40,6 +40,7 @@ MAX_FREQ_OFFSET = 5000;
 codeOffsetArray = zeros(1,numSVs);
 freqOffsetArray = zeros(1,numSVs);
 txSignal = zeros(20*numBits*1023*OSR, numSVs);
+GoldcodeSym = zeros(numSVs,1023);
 Fs = OSR*1e6;
 
 for nSV = 1:numSVs
@@ -57,6 +58,7 @@ for nSV = 1:numSVs
     temp1 = temp((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
     temp2 = temp1 .* exp(J*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
     txSignal(:,nSV) = transpose(temp2);                % make it a column vector
+    GoldcodeSym(nSV,:) = transpose(symbol);
     codeOffsetArray(nSV) = codeOffset;
     freqOffsetArray(nSV) = freqOffset;
 end  % End of nSV
