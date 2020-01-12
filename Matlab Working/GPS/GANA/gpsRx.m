@@ -1,9 +1,22 @@
-SVID = randi(32,5);
-[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx(SVID,10,10,0.25);
+[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray] = gpsTx();
 
 %% Adding Noise 
 snr = -10;
 TxData = awgn(txSignal,snr);
+
+%% Reciever 
+
+
+tx = temp2.*exp(J*(-1)*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
+tx = real(tx);
+downsamtx = downsample(tx,OSR);
+downsamtx_hfilt = conv(downsamtx,hFilt);
+downsamtx_hfilt = real(downsamtx_hfilt);
+crossCorr = xcorr2(downsamtx_hfilt,symbol);              
+outputData = crossCorr(codeLen:codeLen:end)/codeLen;
+% plot(outputData)
+
+
 
 J = sqrt(-1);
 MAX_CODE_OFFSET = 64;

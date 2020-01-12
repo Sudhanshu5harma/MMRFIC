@@ -30,6 +30,7 @@ end
 numSVs = length(svIdArray);
 payload = 1*(rand(1,numBits) > 0.5);                         % Random payload
 payload_OSR = reshape(repmat(payload,20,1),1,numBits*20);    % 50 Hz rate
+payload_OSR = 2*payload_OSR-1;
 hFilt = rcosdesign(alpha,6,OSR,'sqrt');                      % OSR times oversampled with alpha excess BW
 hFiltLen = length(hFilt);
 
@@ -50,7 +51,8 @@ for nSV = 1:numSVs
     freqOffset = MAX_FREQ_OFFSET *(rand-0.5);   % +/- 5K freq offset
     
     [code, symbol] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, codeOffset);
-    spreadData = kron(symbol,2*payload_OSR-1);
+%     spreadData = kron(symbol,2*payload_OSR-1);
+    spreadData = kron(payload_OSR,symbol);
     temp = conv(upsample(spreadData, OSR), hFilt);
     temp1 = temp((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
     temp2 = temp1 .* exp(J*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
