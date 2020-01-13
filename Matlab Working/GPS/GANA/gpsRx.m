@@ -21,7 +21,7 @@ close all;
 [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,symbol] = gpsTx();
 
 %% Adding Noise
-snr = -26;
+snr = -20;
 txSignal = awgn(txSignal,snr);
 
 %% Reciever
@@ -43,17 +43,17 @@ for nSV = 1:numSVs
     crossCorr = xcorr2(downsamtx_hfilt,symbol(nSV,:));
     outputData = crossCorr(1023:codeLen:end)/codeLen;
     % RxData(:,nSV) = outputData;
-    % plot(outputData)
+    %plot(outputData)
     % crossCorrData(:,nSV) = crossCorr;
 end
 
 %% Plotting avg value
-avgValue = zeros(10);
+avgValue = zeros(1,10);
 val = 0;
 lastval = 0;
 for i =1:20:length(outputData)
     lastval = lastval+20;
-    avg = sum(outputData(i:1:lastval));
+    avg = sum(outputData(i:1:lastval))/20;
     val = val +1;
     avgValue(val)=avg;
 end
