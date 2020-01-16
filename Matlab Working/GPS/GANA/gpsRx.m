@@ -31,8 +31,39 @@ Fs = OSR*1e6;
 J = sqrt(-1);
 hFiltLen = length(hFilt);
 [numSVs,lengthtx] =size(txSignal);
-% RxData = zeros(201,numSVs);
-% crossCorrData = zeros((lengthtx/10)+60,numSVs);
+RxData = zeros(numSVs,lengthtx/(1023*OSR));
+crossCorrData = zeros((lengthtx/10)+60,numSVs);
+% for nSV = 1:numSVs
+%     temp1 = txSignal(nSV,:);
+%     tx = temp1.*exp(J*(-1)*2*pi*freqOffsetArray(nSV)/Fs*[0:lengthtx-1]);
+%     tx = real(tx);
+%     downsamtx = downsample(tx,OSR);
+%     downsamtx_hfilt = conv(downsamtx,hFilt);
+%     downsamtx_hfilt = downsamtx_hfilt((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
+%     crossCorr = xcorr2(downsamtx_hfilt,symbol(nSV,:));
+%     outputData = crossCorr(1023:codeLen:end)/codeLen;
+%     RxData(nSV,:) = outputData;
+% end
+% 
+% %% Plotting avg value
+% avgValue = zeros(1,10);
+% 
+% for nSV = 1:numSVs
+%     val = 0;
+%     lastval = 0;
+%     for i =1:20:length(outputData)
+%         Data = RxData(nSV,:);
+%         lastval = lastval+20;
+%         avg = sum(Data(i:1:lastval))/20;
+%         val = val +1;
+%         avgValue(val)=avg;
+%     end
+%     output = (1*(avgValue >0));
+%     error = sum(bitxor(output,payload));
+%     disp (['Error for SNR -20 in SV ',num2str(nSV),'  is ', num2str(error), ' in time domain']);
+% end
+%% Frequency Domain
+FrequencyDomain=zeros(numSVs,2000);
 for nSV = 1:numSVs
     temp1 = txSignal(nSV,:);
     tx = temp1.*exp(J*(-1)*2*pi*freqOffsetArray(nSV)/Fs*[0:lengthtx-1]);
@@ -40,36 +71,32 @@ for nSV = 1:numSVs
     downsamtx = downsample(tx,OSR);
     downsamtx_hfilt = conv(downsamtx,hFilt);
     downsamtx_hfilt = downsamtx_hfilt((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
-    crossCorr = xcorr2(downsamtx_hfilt,symbol(nSV,:));
-    outputData = crossCorr(1023:codeLen:end)/codeLen;
-    % RxData(:,nSV) = outputData;
-    %plot(outputData)
-    % crossCorrData(:,nSV) = crossCorr;
+    starting =1;
+    i=1;
+    goldCodeFFT = conj(fft(symbol(nSV,:)));
+    for val = 1023:1023:length(downsamtx_hfilt)
+        payloadFFT = fft(downsamtx_hfilt(starting:val));
+        crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
+        starting = starting +1023;
+        FrequencyDomain(nSV,i) =crossCorr_FFT(1);
+        i=i+1;
+    end
+end
+avgValue = zeros(1,100);
+for nSV = 1:numSVs
+    val = 0;
+    lastval = 0;
+    for i =1:20:length(FrequencyDomain)
+        Data = FrequencyDomain(nSV,:);
+        lastval = lastval+20;
+        avg = sum(Data(i:1:lastval))/20;
+        val = val +1;
+        avgValue(val)=avg;
+    end
+    output = (1*(avgValue >0));
+    error = sum(bitxor(output,payload));
+    disp (['Error for SNR -20 in SV ',num2str(nSV),'  is ', num2str(error), ' in Frequency Domain']);
 end
 
-%% Plotting avg value
-avgValue = zeros(1,10);
-val = 0;
-lastval = 0;
-for i =1:20:length(outputData)
-    lastval = lastval+20;
-    avg = sum(outputData(i:1:lastval))/20;
-    val = val +1;
-    avgValue(val)=avg;
-end
-% stem(avgValue)
-output = (1*(avgValue >0));
-error = sum(bitxor(output,payload));
-%%
-% starting = 1;
-% i=1;
-% FrequencyDomain=zeros(1,numBits);
-% goldCodeFFT = conj(fft(goldCode1));
-% for val = 1023:1023:length(TxData)
-%   payloadFFT = fft(TxData(starting:val));
-%   crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
-%    FrequencyDomain(1,i) =crossCorr_FFT(1)/codeLength; 
-%    starting = starting +1023;
-% end
 
 toc;
