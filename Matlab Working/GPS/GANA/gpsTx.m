@@ -16,7 +16,7 @@ if (nargin < 1)
 end
 
 if (nargin < 2)
-    numBits = 10;  % 10*20 msec duration
+    numBits = 100;  % 10*20 msec duration
 end
 
 if (nargin < 3)

@@ -13,7 +13,7 @@
 %% line 56 gpsTx.m
 %% Sending goldcode with gpsTx()
 %% currently with no codeOffset only with FreqOffsetArray.
-
+tic;
 clc;
 clear all;
 close all;
@@ -57,4 +57,19 @@ for i =1:20:length(outputData)
     val = val +1;
     avgValue(val)=avg;
 end
-stem(avgValue)
+% stem(avgValue)
+output = (1*(avgValue >0));
+error = sum(bitxor(output,payload));
+%%
+% starting = 1;
+% i=1;
+% FrequencyDomain=zeros(1,numBits);
+% goldCodeFFT = conj(fft(goldCode1));
+% for val = 1023:1023:length(TxData)
+%   payloadFFT = fft(TxData(starting:val));
+%   crossCorr_FFT = ifft(payloadFFT .*goldCodeFFT);
+%    FrequencyDomain(1,i) =crossCorr_FFT(1)/codeLength; 
+%    starting = starting +1023;
+% end
+
+toc;
