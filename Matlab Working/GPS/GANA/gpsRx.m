@@ -10,9 +10,8 @@
 %% ver  0.1   10-Jan-2020   Sudhanshu             Created
 
 %% changes made:
-%% line 56 gpsTx.m
 %% Sending goldcode with gpsTx()
-%% currently with no codeOffset only with FreqOffsetArray.
+
 tic;
 clc;
 clear all;
