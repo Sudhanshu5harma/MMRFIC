@@ -21,18 +21,19 @@ close all;
 [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,symbol] = gpsTx();
 
 %% Adding Noise
-snr = -20;
+snr = -23;
 txSignal = awgn(txSignal,snr);
 
 %% Reciever
 codeLen = 1023;
 OSR = 10;
+numBits = 100;
 Fs = OSR*1e6;
 J = sqrt(-1);
 hFiltLen = length(hFilt);
 [numSVs,lengthtx] =size(txSignal);
 RxData = zeros(numSVs,lengthtx/(1023*OSR));
-crossCorrData = zeros((lengthtx/10)+60,numSVs);
+% crossCorrData = zeros((lengthtx/10)+60,numSVs);
 % for nSV = 1:numSVs
 %     temp1 = txSignal(nSV,:);
 %     tx = temp1.*exp(J*(-1)*2*pi*freqOffsetArray(nSV)/Fs*[0:lengthtx-1]);
@@ -60,7 +61,7 @@ crossCorrData = zeros((lengthtx/10)+60,numSVs);
 %     end
 %     output = (1*(avgValue >0));
 %     error = sum(bitxor(output,payload));
-%     disp (['Error for SNR -20 in SV ',num2str(nSV),'  is ', num2str(error), ' in time domain']);
+%     disp (['Error for SNR ',num2str(snr),' in SV ',num2str(nSV),'  is ', num2str(error), ' in time domain']);
 % end
 %% Frequency Domain
 FrequencyDomain=zeros(numSVs,2000);
@@ -82,21 +83,22 @@ for nSV = 1:numSVs
         i=i+1;
     end
 end
-avgValue = zeros(1,100);
+avgValue = zeros(1,numBits);
+freq = 20;                                %50Hz 
 for nSV = 1:numSVs
     val = 0;
     lastval = 0;
-    for i =1:20:length(FrequencyDomain)
+    for i =1:freq:length(FrequencyDomain)
         Data = FrequencyDomain(nSV,:);
-        lastval = lastval+20;
-        avg = sum(Data(i:1:lastval))/20;
+        lastval = lastval+freq;
+        avg = sum(Data(i:1:lastval))/freq;
         val = val +1;
         avgValue(val)=avg;
     end
     output = (1*(avgValue >0));
     error = sum(bitxor(output,payload));
-    disp (['Error for SNR -20 in SV ',num2str(nSV),'  is ', num2str(error), ' in Frequency Domain']);
-end
+    disp (['Error for SNR ',num2str(snr),' in SV ',num2str(nSV),'  is ', num2str(error), ' in Frequency Domain']);
+end 
 
 
 toc;
