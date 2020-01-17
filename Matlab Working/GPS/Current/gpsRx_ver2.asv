@@ -38,7 +38,7 @@ for nSV = 1:allSVs
     init_g2 = ones(1,10);
     fbMode = ['SV',num2str(nSV)];
     [code, Goldcode] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, 0);
-    Goldcode = upsample(Goldcode, OSR);
+    Goldcode = upsample(spreadData, OSR)
     GoldcodeMat(nSV,:) = Goldcode;
 end
 disp('Goldcode Generated');
