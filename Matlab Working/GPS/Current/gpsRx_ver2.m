@@ -44,26 +44,27 @@ end
 disp('Goldcode Generated and upsampled by 10');
 
 %% Calculating Offset and goldcode used
-offsetMat = zeros(allSVs,codeLen*10);
+%offsetMat = zeros(allSVs,codeLen*10);
 freqoffset = zeros(length(Goldcode),codeLen*10);
 endvalue = 10230;
-for nSV = 1:numSVs
-    for start = 1:10230:lengthtx                                   % for ten bits runs 200 times        
+%for 
+nSV = 1;
+    for start = 1:10230:lengthtx/200                                   % for ten bits runs 200 times        
         TxData = txSignal(start:endvalue);
         TxDataFFT = fft(TxData);
-        for GcNum=1:1:allSVs
-            GoldcodeMatFFT = conj(fft(GoldcodeMat(GcNum,:)));
+        for GcNum=1:1:1%allSVs
             disp(['Running for Goldcode number ', num2str(GcNum)]);
-            for frequencyOffset = 1:1:length(Goldcode)              % runs 10230 time  
-                Goldcodeshift = circshift(GoldcodeMatFFT,[1,0]);
-                crossCorr_FFT = ifft(TxDataFFT .*Goldcodeshift);
-                disp(['.........Running for Frequency Offset of ' ,num2str(frequencyOffset)]);
-                freqoffset(frequencyOffset,:)=crossCorr_FFT;
+            for rotation = 0:1:length(Goldcode)              % runs 10230 time
+                Goldcodeshift = circshift(GoldcodeMat(GcNum,:),[rotation,0]);                
+                GoldcodeMatFFT = conj(fft(Goldcodeshift));
+                crossCorr_FFT = ifft(TxDataFFT .*GoldcodeMatFFT);
+                disp(['.........Running for Frequency Offset of ' ,num2str(rotation)]);
+                freqoffset(rotation+1,:)=crossCorr_FFT;
             end
         end
         endvalue = endvalue +10230;
     end
-end
+%end
 %% Frequency Domain
 
 % FrequencyDomain=zeros(numSVs,lengthtx/(1023*OSR));

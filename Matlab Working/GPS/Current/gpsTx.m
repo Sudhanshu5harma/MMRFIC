@@ -12,7 +12,7 @@
 function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,GoldcodeSym] = gpsTx(svIdArray, numBits, OSR, alpha)
 
 if (nargin < 1)
-    svIdArray = randi(32,1);    % Random 5 SVs
+    svIdArray = 1% randi(32,5);    % Random 5 SVs
 end
 
 if (nargin < 2)
