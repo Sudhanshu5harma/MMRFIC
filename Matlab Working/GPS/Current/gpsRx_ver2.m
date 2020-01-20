@@ -49,19 +49,20 @@ freqoffset = zeros(length(Goldcode),codeLen*10);
 endvalue = 10230;
 %for 
 nSV = 1;
-    for start = 1:10230:lengthtx/200                                   % for ten bits runs 200 times        
+    for start = 1:10230:lengthtx/200                                   % for ten bits interation 200 times        
         TxData = txSignal(start:endvalue);
         TxDataFFT = fft(TxData);
         for GcNum=1:1:1%allSVs
             disp(['Running for Goldcode number ', num2str(GcNum)]);
-            for rotation = 0:1:length(Goldcode)              % runs 10230 time
-                Goldcodeshift = circshift(GoldcodeMat(GcNum,:),[rotation,0]);                
+            for rotation = 0:1:length(Goldcode)-1              % runs 10230 time
+                Goldcodeshift = circshift(GoldcodeMat(GcNum,:),rotation);                
                 GoldcodeMatFFT = conj(fft(Goldcodeshift));
                 crossCorr_FFT = ifft(TxDataFFT .*GoldcodeMatFFT);
                 disp(['.........Running for Frequency Offset of ' ,num2str(rotation)]);
                 freqoffset(rotation+1,:)=crossCorr_FFT;
+%                 plot(crossCorr_FFT)
             end
-        end
+        end 
         endvalue = endvalue +10230;
     end
 %end
