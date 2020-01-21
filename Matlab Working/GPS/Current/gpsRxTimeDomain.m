@@ -49,7 +49,6 @@ svIdArray = randi(32,1,6); % Random 6 satellites
 
 %% Generate Rx data
 rxSignal = 10^(SNRdB/20) * sum(txSignal,2) + randn(length(txSignal),1);
-
 %% Generate GPS Gold codes (reference)
 NUM_SVs = MAX_SVs;                          %length(svIdArray);
 refCode = zeros(CODE_LEN*OSR, NUM_SVs);
