@@ -13,7 +13,7 @@ tic;
 clc;
 clear all;
 close all;
-[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,symbol] = gpsTx();
+[txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,svIdArray] = gpsTx();
 %% Adding Noise
 
 snr = 0;
@@ -27,45 +27,38 @@ numBits = 10;
 Fs = OSR*1e6;
 J = sqrt(-1);
 hFiltLen = length(hFilt);
-[numSVs,lengthtx] =size(txSignal);
+[lengthtx,numSVs] =size(txSignal);
 % numSVs =1;                                            % to make it run ones
 
 %% Generating gold code with zero offset
 allSVs = 32;
-GoldcodeMat = zeros(allSVs,codeLen*10);
+refCode = zeros(codeLen*OSR,allSVs);
 for nSV = 1:allSVs
     init_g1 = ones(1,10);
     init_g2 = ones(1,10);
     fbMode = ['SV',num2str(nSV)];
-    [code, Goldcode] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, 0);
-    Goldcode = upsample(Goldcode, OSR);
-    GoldcodeMat(nSV,:) = Goldcode;
+    [code, symbol] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, 0);
+    refCode(:,nSV) = reshape(repmat(symbol, OSR, 1),OSR*CODE_LEN,1);
 end
 disp('Goldcode Generated and upsampled by 10');
 
-%% Calculating Offset and goldcode used
+%% Calculating goldcode used
 %offsetMat = zeros(allSVs,codeLen*10);
-freqoffset = zeros(length(Goldcode),codeLen*10);
 endvalue = 10230;
-%for 
-nSV = 1;
-    for start = 1:10230:lengthtx/200                                   % for ten bits interation 200 times        
-        TxData = txSignal(start:endvalue);
-        TxDataFFT = fft(TxData);
-        for GcNum=1:1:1%allSVs
-            disp(['Running for Goldcode number ', num2str(GcNum)]);
-            for rotation = 0:1:length(Goldcode)-1              % runs 10230 time
-                Goldcodeshift = circshift(GoldcodeMat(GcNum,:),rotation);                
-                GoldcodeMatFFT = conj(fft(Goldcodeshift));
-                crossCorr_FFT = ifft(TxDataFFT .*GoldcodeMatFFT);
-                disp(['.........Running for Frequency Offset of ' ,num2str(rotation)]);
-                freqoffset(rotation+1,:)=crossCorr_FFT;
-%                 plot(crossCorr_FFT)
-            end
-        end 
-        endvalue = endvalue +10230;
-    end
-%end
+for nSV =1:allSVs
+for kk = 1:length(dopplerFreqArray)  % +ve freq offset
+            freqOffset1 = dopplerFreqArray(kk);
+            disp(['Computing correlation for freq :',num2str(freqOffset1)]);
+
+            data1 = data .* exp(-J*2*pi*freqOffset1/Fs*[0:length(data)-1]');
+            %corrFFT = (temp .* conj(codeFFT));
+            corr1 = conv(data1,flipud(code));
+            %corr2 = conv(data1,(code));
+            %plot(abs(corr1));hold on; plot(abs(corr2),'r-.');
+            corr1 = corr1(5115:end-5115);
+            corr(:,ii,kk) = (sum((reshape(corr1,CODE_LEN*OSR,NUM_RPTS*NUM_BITS_AVG)),2));
+end
+end
 %% Frequency Domain
 
 % FrequencyDomain=zeros(numSVs,lengthtx/(1023*OSR));

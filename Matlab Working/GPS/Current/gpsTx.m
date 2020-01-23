@@ -12,7 +12,7 @@
 function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray,svIdArray] = gpsTx(svIdArray, numBits, OSR, alpha)
 
 if (nargin < 1)
-    svIdArray = 1;% randi(32,5);    % Random 5 SVs
+    svIdArray = randi(32,1,6);    % Random 5 SVs
 end
 
 if (nargin < 2)
@@ -40,7 +40,6 @@ MAX_FREQ_OFFSET = 5000;
 codeOffsetArray = zeros(1,numSVs);
 freqOffsetArray = zeros(1,numSVs);
 txSignal = zeros(20*numBits*1023*OSR,numSVs);
-GoldcodeSym = zeros(numSVs,1023);
 Fs = OSR*1e6;
 
 for nSV = 1:numSVs
