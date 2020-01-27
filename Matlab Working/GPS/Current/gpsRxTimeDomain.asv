@@ -73,10 +73,10 @@ dopplerFreqArray = linspace(-MAX_DOPPLER,MAX_DOPPLER,1001);
 
 disp('Code and Freq Offset estimation');
 data = rxSignal(1:CODE_LEN*OSR*NUM_RPTS*NUM_BITS_AVG);
-for ii = 1:length(svIdArray)
-%for ii = 1:MAX_SVs
-    code = refCode(:,svIdArray(ii));
-%     disp(['Computing correlation for SVid :',num2str(svIdArray(ii))]);
+% for ii = 1:length(svIdArray)
+for ii = 1:MAX_SVs
+    code = refCode(:,ii));
+    disp(['Computing correlation for SVid :',num2str(svIdArray(ii))]);
 
     %codeFFT = fft(code);
     %for jj = 1:20
