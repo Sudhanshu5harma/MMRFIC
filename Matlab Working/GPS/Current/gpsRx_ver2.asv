@@ -6,7 +6,7 @@
 %% function [txSignal, payload, hFilt, codeOffsetArray, freqOffsetArray, symbol] = gpsTx(svIdArray, numBits, OSR, alpha)
 %%
 %% Version History: (in reverse chronological order please)
-%% ver  0.2   17-Jan-2020   Sudhanshu             Gold code with Codeoffset and Frequency Offset
+%% ver  0.2   17-Jan-2020   Sudhanshu             Codeoffset and Frequency Offset
 %% ver  0.1   14-Jan-2020   Sudhanshu             Time and Frequency Domain
 %% ver  0.1   10-Jan-2020   Sudhanshu             Created
 %% changes - Zero offset,
@@ -24,7 +24,9 @@ txSignal = awgn(txSignal,snr);
 
 codeLen = 1023;
 OSR = 10;
-numBits = 10;
+NUM_RPTS = 20;
+NUM_BITS_AVG =1;
+Payload_Bits = 10;
 Fs = OSR*1e6;
 J = sqrt(-1);
 hFiltLen = length(hFilt);
@@ -49,7 +51,8 @@ endvalue = 10230;
 goldval = zeros(1,6);
 for CurrSV =1:numSVs
 for nSV =1:allSVs
-    corr = xcorr(txSignal(1:endvalue,CurrSV),refCode(:,nSV));
+    corr = xcorr(txSignal(1:codeLen*OSR*NUM_RPTS*NUM_BITS_AVG,1)),refCode(:,nSV));
+    corr1 = (sum((reshape(corr,OSR*codeLen,20)),2));
     GoldCodeUsed(:,nSV) = corr;
     [tempMax,maxIndex] = max(abs(GoldCodeUsed));
 end

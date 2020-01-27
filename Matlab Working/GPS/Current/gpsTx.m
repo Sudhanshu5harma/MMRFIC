@@ -47,7 +47,7 @@ for nSV = 1:numSVs
     init_g2 = ones(1,10);
     codeLen = 1023;
     fbMode = ['SV',num2str(svIdArray(nSV))];
-    codeOffset = floor(0*rand*MAX_CODE_OFFSET);   % Maximum of 64 code phase
+    codeOffset = floor(rand*MAX_CODE_OFFSET);   % Maximum of 64 code phase
     freqOffset = MAX_FREQ_OFFSET *(rand-0.5);   % +/- 5K freq offset
     
     [code, symbol] = GPS_GoldSequence_generator(init_g1, init_g2, codeLen, fbMode, codeOffset);
@@ -56,8 +56,6 @@ for nSV = 1:numSVs
     temp1 = temp((hFiltLen-1)/2+1:end-(hFiltLen-1)/2);
     temp2 = temp1 .* exp(J*2*pi*freqOffset/Fs*[0:length(temp1)-1]);
     txSignal(:,nSV) = transpose(temp2);                % make it a column vector
-%     txSignal(nSV,:) = temp2;                            % sending as a row 
-%     GoldcodeSym(nSV,:) = symbol;
     codeOffsetArray(nSV) = codeOffset;
     freqOffsetArray(nSV) = freqOffset;
 end  % End of nSV

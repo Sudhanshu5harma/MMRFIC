@@ -90,9 +90,11 @@ for ii = 1:length(svIdArray)
             data1 = data .* exp(-J*2*pi*freqOffset1/Fs*[0:length(data)-1]');
             %corrFFT = (temp .* conj(codeFFT));
             corr1 = conv(data1,flipud(code));
+            corr1_fft = ifft(fft(data1,214830).*fft(flipud(code),214830));
             %corr2 = conv(data1,(code));
             %plot(abs(corr1));hold on; plot(abs(corr2),'r-.');
             corr1 = corr1(5115:end-5115);
+            corr1_fft = corr1_fft(5115:end-5115);
             corr(:,ii,kk) = (sum((reshape(corr1,CODE_LEN*OSR,NUM_RPTS*NUM_BITS_AVG)),2));
         end
         %figure(1);plot(abs(corr));
