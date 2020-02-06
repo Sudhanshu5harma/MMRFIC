@@ -18,7 +18,7 @@ roundmode = 'round';
 A1 = transpose(A)*A;
 
 %ni = ceil(log2(max(max(abs(A1)))));    %Number of integer bits
-nt = 32;                              %Total number of bits;
+nt = 20;                              %Total number of bits;
 %%[L,D,L_Transpose] = chol_fp(A1,nt,ni,signmode,roundmode);
 [L,D,L_Transpose] = chol_float(A1);
 ni =ceil(log2(max(max(abs(L)))));
