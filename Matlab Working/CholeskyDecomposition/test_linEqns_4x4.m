@@ -3,13 +3,13 @@ clear all;
 close all; 
 tic
 
-rand('seed',123);
-randn('seed',456);
+% rand('seed',123);
+% randn('seed',456);
 
 n = 4;
 A = (rand(n,n)*100);
 b = [5;4;8;9];
-
+cond(A)
 
 signmode = 'signed';
 roundmode = 'round';
@@ -17,6 +17,9 @@ roundmode = 'round';
 
 A1 = transpose(A)*A;
 ni_nor =floor(log2(max(max(abs(A1)))));
+if (ni_nor == 0)
+    ni_nor = 1;
+end 
 A1 = A1/(2^ni_nor);
 ni = ceil(log2(max(max(abs(A1)))));    %Number of integer bits
 nt = 22;                              %Total number of bits;
@@ -37,9 +40,7 @@ X = (L_Transpose_inv*D_inv *L_inv) * (transpose((A/2^ni_nor))*b);
 
 X_inBuilt = A\b;
 [X X_inBuilt]
-SNR1  = 20*log10(sqrt((abs(sum(sum(X-X_inBuilt)))).^2/(n)))
-
-SNR = snr(X_inBuilt,X)
+difference = (X-X_inBuilt)
 %% test the equation 
 [A(1,:)*X A(2,:)*X A(3,:)*X A(4,:)*X]
 toc

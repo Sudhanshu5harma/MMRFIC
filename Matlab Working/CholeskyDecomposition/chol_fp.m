@@ -1,3 +1,6 @@
+%% Function to compute fixed point cholesky Decomposition.
+% Computes the decomposition of A into L,D,L'
+%% (C) MMRFIC Technology Pvt. Ltd,. Bangalore INDIA
 
 function[L_fp, D_fp, L_trans] = chol_fp(A,nt,ni,signmode,roundmode)
   N = length(A);
