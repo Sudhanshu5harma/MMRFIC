@@ -6,7 +6,7 @@ clc
 % rand('seed',123);
 % randn('seed',456);
 n = 4;
-A = (rand(n,n)*100);            % Input matrix 
+A = 100*rand(n,100);            % Input matrix 
 A_cond = (cond(A));
 disp(['condition of matrix  ', num2str(A_cond)]);
 b = [5;4;8;9];                  
