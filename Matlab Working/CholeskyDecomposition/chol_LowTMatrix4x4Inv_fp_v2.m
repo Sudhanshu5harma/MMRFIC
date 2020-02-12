@@ -4,8 +4,9 @@
 % triagular matrix
 %% (C) MMRFIC Technology Pvt. Ltd,. Bangalore INDIA
 
-function [matrixInverse_fp] = chol_LowTMatrix4x4Inv_fp_v2(A,nt,ni,signmode,roundmode)
+function [matrixInverse] = chol_LowTMatrix4x4Inv_fp_v2(A,nt,ni,signmode,roundmode)
 % storing the repeated constants to save multipliers
+
 Val_1 = quantize1(A(3,3)*A(4,4),nt,3*ni,signmode,roundmode);
 Val_2 = quantize1(A(3,2)*A(4,4),nt,3*ni,signmode,roundmode);
 Val_3 = quantize1(A(3,2)*A(4,3),nt,3*ni,signmode,roundmode);
@@ -34,6 +35,6 @@ adj_fp(4,3) = quantize1(adj(4,3),nt,3*ni,signmode,roundmode);
 adj(4,4) = A(1,1)*A(2,2)*A(3,3);
 adj_fp(4,4) = quantize1(adj(4,4),nt,3*ni,signmode,roundmode);
 
-matrixInverse = adj_fp/determinant_fp;
+matrixInverse = adj/determinant;
 matrixInverse_fp = quantize1(adj_fp/determinant_fp,nt,(4*ni)+2,signmode,roundmode);
 end 

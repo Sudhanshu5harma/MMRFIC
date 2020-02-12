@@ -28,14 +28,14 @@ ni =ceil(log2(max(max(abs(L)))));
 if (ni==0)
     ni =1;
 end
-% [L_inv] = chol_LowTMatrix4x4Inv_fp_v2(L,nt,ni,signmode,roundmode);
+%  [L_inv] = chol_LowTMatrix4x4Inv_fp_v2(L,nt,ni,signmode,roundmode);
 [L_inv] = chol_LowTMatrix4x4Inv(L);%,nt,ni,signmode,roundmode);
 
 ni =ceil(log2(max(max(abs(D)))));
 if (ni==0)
     ni =1;
 end
-% [D_inv] = chol_LowTMatrix4x4Inv_fp_v2(D,nt,ni,signmode,roundmode);
+%  [D_inv] = chol_LowTMatrix4x4Inv_fp_v2(D,nt,ni,signmode,roundmode);
 [D_inv] = chol_LowTMatrix4x4Inv(D);%,nt,ni,signmode,roundmode);
 
 %  L1_inv = Inverse(L);
