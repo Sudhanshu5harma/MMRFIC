@@ -21,8 +21,8 @@ ni_nor =floor(log2(max(max(abs(A1)))));             % Number nearest power of 2,
 A1 = A1/(2^ni_nor);
 ni = ceil(log2(max(max(abs(A1)))));                 %Number of integer bits
 nt = 22;                                            %Total number of bits;
-% [L,D,L_Transpose] = chol_fp(A1,nt,ni,signmode,roundmode);
-[L,D,L_Transpose] = chol4X4(A1);
+[L,D,L_Transpose] = chol4X4_fp(A1,nt,ni,signmode,roundmode);
+%[L,D,L_Transpose] = chol4X4(A1);
 
 ni =ceil(log2(max(max(abs(L)))));
 if (ni==0)
