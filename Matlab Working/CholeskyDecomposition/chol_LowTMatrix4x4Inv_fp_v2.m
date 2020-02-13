@@ -45,5 +45,5 @@ adj(4,4) = A(1,1)*A(2,2)*A(3,3);
 adj_fp(4,4) = quantize1(A(1,1)*A(2,2)*A(3,3),nt,5*ni,signmode,roundmode);
 
 matrixInverse = adj/determinant;
-matrixInverse_fp = quantize1(adj_fp/determinant_fp,nt,10*ni,signmode,roundmode);
+matrixInverse_fp = quantize1(adj_fp/determinant_fp,nt,5*ni,signmode,roundmode);
 end 
