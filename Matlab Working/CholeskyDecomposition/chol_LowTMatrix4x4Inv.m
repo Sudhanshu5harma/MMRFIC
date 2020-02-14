@@ -1,6 +1,6 @@
 %% Function to calculate the inverse of a lower triangular 4x4 matrix 
 
-function [matrixInverse] = chol_LowTMatrix4x4Inv(A);
+function [matrixInverse] = chol_LowTMatrix4x4Inv(A)
 determinant = A(1,1)*A(2,2)*A(3,3)*A(4,4); 
 
 adj(1,1) = A(2,2)*A(3,3)*A(4,4);
