@@ -17,12 +17,12 @@ roundmode = 'round';
 
 
 A1 = transpose(A)*A;                                %% To convert the matrix into hermitian 
-ni_nor =floor(log2(max(max(abs(A1)))));             % Number nearest power of 2, to normalize the matrix    
+ni_nor =ceil(log2(max(max(abs(A1)))));             % Number nearest power of 2, to normalize the matrix    
 A1 = A1/(2^ni_nor);
 ni = ceil(log2(max(max(abs(A1)))));                 %Number of integer bits
 nt = 22;                                            %Total number of bits;
-% [L,D,L_Transpose] = chol4X4_fp(A1,nt,ni,signmode,roundmode);
-[L,D,L_Transpose] = chol4X4(A1);
+[L,D,L_Transpose] = chol4X4_fp(A1,nt,ni,signmode,roundmode);
+%[L,D,L_Transpose] = chol4X4(A1);
 
 ni =ceil(log2(max(max(abs(L)))));
 if (ni==0)
