@@ -25,9 +25,9 @@ void NT1065()
 	NT_REG_STRUCT.R3_VAL = r3.val;	
 
 	r4.defaultval=0;
-	r4.lpf_acs_s = freq1;
+	r4.lpf_acs_s = 0; //Status Bit
 	r4.lpf_exe = pll_a12b34;
-	r4.val = r4.lpf_exe|r4.lpf_acs_s<<1|r4.defaultval<<2; //status bit can't be fixed
+	r4.val = r4.lpf_exe|r4.lpf_acs_s<<1|r4.defaultval<<2; 
 	NT_REG_STRUCT.R4_VAL = r4.val;	
 
 	r5.defaultval=0;
@@ -48,12 +48,21 @@ void NT1065()
 	NT_REG_STRUCT.R6_VAL = r6.val;
 
 	r7.defaultval=0;
-	r7.status_Indicator = //status can't be assigned 
-	r7.val = // how to set
-	NT_REG_STRUCT.R5_VAL = r7.val
+	r7.status_Indicator = 0 ; //status Bit
+	r7.temp_val = 0 ; //status Bit
+	r7.unused = 0 ; //status Bit
+	r7.val = r7.temp_val|r7.unused<<2|r7.status_Indicator<<3|r7.defaultval<<5;
+	NT_REG_STRUCT.R7_VAL = r7.val;
 
-	// r8 is same as r7
-	//r9 has status bits
+	NT_REG_STRUCT.R8_VAL = r7.val;  // r8 is same as r7
+
+	r9.defaultval=0;
+	r9.AGC_indicator = 00 ; //status Bit
+	r9.gain_value = 0000 ; //status Bit
+	r9.val = r9.gain_value|r9.AGC_indicator<<4|r9.defaultval<<6;
+	NT_REG_STRUCT.R9_VAL = r9.val;
+
+	
 	//r10 also has status bits 
 
 	r11.defaultval =0;
@@ -69,10 +78,9 @@ void NT1065()
 	r12.val = r12.clk_type|r12.clk_amp<<2|r12.clk_type<<3|r12.clk_freqSource<<4|r12.defaultval<<6;
 	NT_REG_STRUCT.R12_VAL = r12.val;
 
-	r13.chLSB = ; // How to choose ?
+	r13.chLSB = 0; // How to choose ?
 	r13.chEN = enb;
 	r13.val = r13.chEN|r13.chLSB<<1|r13.defaultval<<2;
-	NT_REG_STRUCT.R13_VAL = r13.val;
 
 
 }

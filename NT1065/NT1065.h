@@ -2,8 +2,8 @@
 // Created by Sudhanshu Sharma on 12-02-2020.
 //
 
-#ifndef UNTITLED_NT1066_H
-#define UNTITLED_NT1065_H
+ #ifndef UNTITLED_NT1066_H
+ #define UNTITLED_NT1065_H
 
 struct {
     unsigned long R0_VAL;
@@ -17,6 +17,44 @@ struct {
     unsigned long R8_VAL;
     unsigned long R9_VAL;
     unsigned long R10_VAL;
+    unsigned long R11_VAL;
+    unsigned long R12_VAL;
+    unsigned long R13_VAL;
+    unsigned long R14_VAL;
+    unsigned long R15_VAL;
+    unsigned long R16_VAL;
+    unsigned long R17_VAL;
+    unsigned long R18_VAL;
+    unsigned long R19_VAL;
+    unsigned long R20_VAL;
+    unsigned long R21_VAL;
+    unsigned long R22_VAL;
+    unsigned long R23_VAL;
+    unsigned long R24_VAL;
+    unsigned long R25_VAL;
+    unsigned long R26_VAL;
+    unsigned long R27_VAL;
+    unsigned long R28_VAL;
+    unsigned long R29_VAL;
+    unsigned long R30_VAL;
+    unsigned long R31_VAL;
+    unsigned long R32_VAL;
+    unsigned long R33_VAL;
+    unsigned long R34_VAL;
+    unsigned long R35_VAL;
+    unsigned long R36_VAL;
+    unsigned long R37_VAL;
+    unsigned long R38_VAL;
+    unsigned long R39_VAL;
+    unsigned long R40_VAL;
+    unsigned long R41_VAL;
+    unsigned long R42_VAL;
+    unsigned long R43_VAL;
+    unsigned long R44_VAL;
+    unsigned long R45_VAL;
+    unsigned long R46_VAL;
+    unsigned long R47_VAL;
+    unsigned long R48_VAL;
 }NT_REG_STRUCT;
 
 typedef enum {
@@ -31,6 +69,44 @@ typedef enum {
     R8_ADDR ,
     R9_ADDR ,
     R10_ADDR ,
+    R11_ADDR ,
+    R12_ADDR ,
+    R13_ADDR ,
+    R14_ADDR ,
+    R15_ADDR ,
+    R16_ADDR ,
+    R17_ADDR ,
+    R18_ADDR ,
+    R19_ADDR ,
+    R20_ADDR ,
+    R21_ADDR ,
+    R22_ADDR ,
+    R23_ADDR ,
+    R24_ADDR ,
+    R25_ADDR ,
+    R26_ADDR ,
+    R27_ADDR ,
+    R28_ADDR ,
+    R29_ADDR ,
+    R30_ADDR ,
+    R31_ADDR ,
+    R32_ADDR ,
+    R33_ADDR ,
+    R34_ADDR ,
+    R35_ADDR ,
+    R36_ADDR ,
+    R37_ADDR ,
+    R38_ADDR ,
+    R39_ADDR ,
+    R40_ADDR ,
+    R41_ADDR ,
+    R42_ADDR ,
+    R43_ADDR ,
+    R44_ADDR ,
+    R45_ADDR ,
+    R46_ADDR ,
+    R47_ADDR ,
+    R48_ADDR ,
 }NT_ADDR_STRUCT;
 
 struct {
@@ -143,18 +219,33 @@ typedef enum{
 	fail=0,
 	valid ,
 }AOK ;
-typedef enum{
-// I don't know how to assign 
-}TS_code;
 struct{
-	AOK status_Indicator
+	AOK status_Indicator;
 	unsigned short defaultval;
 	unsigned short unused;
 	unsigned short val;
+	unsigned short temp_val;
 }r7;
 
 // r8 is same as r7
-//r9 has status bits
+
+typedef enum{
+	val1=00,
+	val2 ,
+	val3 ,
+	val4 ,
+}RF_AG;
+typedef enum{
+	Gval1 = 0000,
+	Gval2 = 1111 ,
+}RF_GainS ;
+struct{
+	RF_AG AGC_indicator;
+	RF_GainS gain_value;
+	unsigned short defaultval
+	unsigned short val;
+}r9;
+
 //r10 also has status bits
 
 typedef enum{
@@ -191,7 +282,7 @@ struct{
 	CLK_Source clk_freqSource;
 	CLK_TP clk_type;
 	CLK_CC clk_amp;
-	CLK_OL clk_type;
+	CLK_OL clk_type1;
 	unsigned short defaultval;
 	unsigned short val;
 }r12;
@@ -209,5 +300,23 @@ struct{
 	CH_EN chEN;
 	unsigned short defaultval;
 	unsigned short val;
-}r13;
+}r13; // r13 is same as channel 2 - r20,ch 3- r27,ch 4- r34
+
+// r14 how to assign as it has 4 channels 
+// r14 is same as ch 2 - r21,ch 3 - r28, ch 4 - r35
+
+typedef enum{
+	threshold1 = 0,
+	threshold2 ,
+}IFA_Amp;
+typedef enum{
+	not_mount = 0,
+	mount ,
+}IFA_Res;
+struct{
+	IFA_Amp threshold1;
+	IFA_Res mount;
+	unsigned short defaultval;
+	unsigned short val;
+}r15; // same as r22, r29, r36
 #endif //UNTITLED_NT1065_H
