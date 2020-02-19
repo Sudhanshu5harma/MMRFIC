@@ -62,8 +62,9 @@ void NT1065()
 	r9.val = r9.gain_value|r9.AGC_indicator<<4|r9.defaultval<<6;
 	NT_REG_STRUCT.R9_VAL = r9.val;
 
-	
-	//r10 also has status bits 
+	r10.Gain_Values = 00000 ; //status Bit
+	r10.val = r9.Gain_Values|r9.defaultval<<5;
+	NT_REG_STRUCT.R9_VAL = r9.val;
 
 	r11.defaultval =0;
 	r11.clckratio = 15;
@@ -78,9 +79,66 @@ void NT1065()
 	r12.val = r12.clk_type|r12.clk_amp<<2|r12.clk_type<<3|r12.clk_freqSource<<4|r12.defaultval<<6;
 	NT_REG_STRUCT.R12_VAL = r12.val;
 
-	r13.chLSB = 0; // How to choose ?
+	r13.defaultval=0;
+	r13.chLSB = lsb; 
 	r13.chEN = enb;
 	r13.val = r13.chEN|r13.chLSB<<1|r13.defaultval<<2;
+	NT_REG_STRUCT.R13_VAL = r13.val;
 
+	r14.defaultval=0;
+	r14.val = r14.codech1|r14.defaultval<<7;
+	NT_REG_STRUCT.R14_VAL = r14.val;
+
+
+
+
+	
+/////// have to do this 
+
+
+
+
+
+
+
+
+
+	r15.defaultval=0;
+	r15.clk_freqSource = plla;
+	r12.clk_type = Lvds;
+	r12.clk_amp = Amp3;
+	r12.clk_type = type1;
+	r12.val = r12.clk_type|r12.clk_amp<<2|r12.clk_type<<3|r12.clk_freqSource<<4|r12.defaultval<<6;
+	NT_REG_STRUCT.R15_VAL = r15.val;
+
+	r20.defaultval=0;
+	r20.ch2LSB = usbch2; 
+	r20.ch2EN = enbch2;
+	r20.val = r20.ch2EN|r20.ch2LSB<<1|r20.defaultval<<2;
+	NT_REG_STRUCT.R20_VAL = r20.val;
+
+	r21.defaultval=0;
+	r21.val = r21.codech2|r21.defaultval<<7;
+	NT_REG_STRUCT.R21_VAL = r21.val;
+
+	r27.defaultval=0;
+	r27.ch3LSB = usbch3; 
+	r27.ch3EN = enbch3;
+	r27.val = r27.ch3EN|r27.ch3LSB<<1|r27.defaultval<<2;
+	NT_REG_STRUCT.R27_VAL = r27.val;
+
+	r28.defaultval=0;
+	r28.val = r28.codech3|r28.defaultval<<7;
+	NT_REG_STRUCT.R28_VAL = r28.val;
+
+	r34.defaultval=0;
+	r34.ch4LSB = lsbch4; 
+	r34.ch4EN = enbch4;
+	r34.val = r34.ch4EN|r34.ch4LSB<<1|r34.defaultval<<2;
+	NT_REG_STRUCT.R34_VAL = r34.val;
+
+	r35.defaultval=0;
+	r35.val = r35.codech4|r35.defaultval<<7;
+	NT_REG_STRUCT.R35_VAL = r35.val;
 
 }

@@ -246,7 +246,23 @@ struct{
 	unsigned short val;
 }r9;
 
-//r10 also has status bits
+typedef enum{
+	Gainval1 = 00000,
+	Gainval2 = 00011,
+	Gainval3 = 00111,
+	Gainval4 = 01010,
+	Gainval5 = 01110,
+	Gainval6 = 10001,
+	Gainval7 = 10101,
+	Gainval8 = 10111,
+	Gainval9 = 11000,
+	Gainval10 = 11111,
+}IFA_GainSt;
+struct{
+	IFA_GainSt Gain_Values;
+	unsigned short defaultval
+	unsigned short val;
+}r10;
 
 typedef enum{
 	ratio1 = 01000,
@@ -300,10 +316,14 @@ struct{
 	CH_EN chEN;
 	unsigned short defaultval;
 	unsigned short val;
-}r13; // r13 is same as channel 2 - r20,ch 3- r27,ch 4- r34
+}r13; 
 
-// r14 how to assign as it has 4 channels 
-// r14 is same as ch 2 - r21,ch 3 - r28, ch 4 - r35
+
+struct{
+	unsigned short defaultval;
+	unsigned LPF_codech1  = 82;
+}r14;
+
 
 typedef enum{
 	threshold1 = 0,
@@ -313,10 +333,174 @@ typedef enum{
 	not_mount = 0,
 	mount ,
 }IFA_Res;
+typedef enum{
+	manGain = 0,
+	autoGain,
+}RF_GC;
+typedef enum{
+	manGainCon = 0,
+	autoGainCon,
+}IFA_GC;
+typedef enum{
+	DC1 = 0,
+	DC2 ,
+	DC3 ,
+	DC4 ,
+}IFA_OP;
+typedef enum{
+	Interface1 = 0,
+	Interface2 ,
+}IFA_OT;
 struct{
-	IFA_Amp threshold1;
-	IFA_Res mount;
+	IFA_Amp ifaAmp;
+	IFA_Res ifaRes;
+	RF_GC rfGain;
+	IFA_GC ifaGc;
+	IFA_OP ifaOp;
+	IFA_OT ifaOt;
 	unsigned short defaultval;
 	unsigned short val;
-}r15; // same as r22, r29, r36
+}r15; 
+// same as r22, r29, r36
+
+typedef enum{
+	usbch2 = 0,
+	lsbch2,
+}CH2_LSB ;
+typedef enum{
+	disch2 = 0,
+	enbch2 ,
+}CH2_EN;
+struct{
+	CH2_LSB ch2LSB;
+	CH2_EN ch2EN;
+	unsigned short defaultval;
+	unsigned short val;
+}r20; 
+
+struct{
+	unsigned short defaultval;
+	unsigned LPF_codech2 = 72;
+}r21;
+
+typedef enum{
+	usbch3 = 0,
+	lsbch3,
+}CH3_LSB ;
+typedef enum{
+	disch3 = 0,
+	enbch3 ,
+}CH3_EN;
+struct{
+	CH3_LSB ch3LSB;
+	CH3_EN ch3EN;
+	unsigned short defaultval;
+	unsigned short val;
+}r27;
+
+struct{
+	unsigned short defaultval;
+	unsigned LPF_codech3 = 62;
+}r28;
+
+typedef enum{
+	usbch4 = 0,
+	lsbch4,
+}CH4_LSB ;
+typedef enum{
+	disch4 = 0,
+	enbch4 ,
+}CH4_EN;
+struct{
+	CH4_LSB ch4LSB;
+	CH4_EN ch4EN;
+	unsigned short defaultval;
+	unsigned short val;
+}r34;
+
+struct{
+	unsigned short defaultval;
+	unsigned LPF_codech4 = 32;
+}r35;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif //UNTITLED_NT1065_H
