@@ -138,4 +138,76 @@ struct{
 	unsigned short defaultval;
 	unsigned short val;
 }r6;
+
+typedef enum{
+	fail=0,
+	valid ,
+}AOK ;
+typedef enum{
+// I don't know how to assign 
+}TS_code;
+struct{
+	AOK status_Indicator
+	unsigned short defaultval;
+	unsigned short unused;
+	unsigned short val;
+}r7;
+
+// r8 is same as r7
+//r9 has status bits
+//r10 also has status bits
+
+typedef enum{
+	ratio1 = 01000,
+	ratio2 = 11111,
+}CDIV_R;
+struct{
+	CDIV_R clckratio;
+	unsigned short defaultval;
+	unsigned short val;
+}r11;
+
+typedef enum{
+	plla=0,
+	pllb ,
+}CLK_Source;
+typedef enum{
+	Cmos =0,
+	Lvds ,
+}CLK_TP;
+typedef enum{
+	Amp1=0,
+	Amp2 ,
+	Amp3 ,
+	Amp4,
+}CLK_CC ;
+typedef enum{
+	type1=0,
+	type2 ,
+	type3 ,
+	type4,
+}CLK_OL;
+struct{
+	CLK_Source clk_freqSource;
+	CLK_TP clk_type;
+	CLK_CC clk_amp;
+	CLK_OL clk_type;
+	unsigned short defaultval;
+	unsigned short val;
+}r12;
+
+typedef enum{
+	usb = 0,
+	lsb,
+}CH_LSB ;
+typedef enum{
+	dis = 0,
+	enb ,
+}CH_EN;
+struct{
+	CH_LSB chLSB;
+	CH_EN chEN;
+	unsigned short defaultval;
+	unsigned short val;
+}r13;
 #endif //UNTITLED_NT1065_H

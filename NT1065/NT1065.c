@@ -45,6 +45,34 @@ void NT1065()
 	r6.rf_agc = forbid4;
 	r6.standby = permit5;
 	r6.val = r6.standby|r6.rf_agc<<1|r6.pll_vco<<2|r6.plla_b<<3|r6.lpf_Cali<<4|r6.defaultval<<5;
-	NT_REG_STRUCT.R5_VAL = r6.val;
+	NT_REG_STRUCT.R6_VAL = r6.val;
+
+	r7.defaultval=0;
+	r7.status_Indicator = //status can't be assigned 
+	r7.val = // how to set
+	NT_REG_STRUCT.R5_VAL = r7.val
+
+	// r8 is same as r7
+	//r9 has status bits
+	//r10 also has status bits 
+
+	r11.defaultval =0;
+	r11.clckratio = 15;
+	r11.val = r11.clckratio|r11.defaultval<<5;
+	NT_REG_STRUCT.R11_VAL = r11.val;
+
+	r12.defaultval=0;
+	r12.clk_freqSource = plla;
+	r12.clk_type = Lvds;
+	r12.clk_amp = Amp3;
+	r12.clk_type = type1;
+	r12.val = r12.clk_type|r12.clk_amp<<2|r12.clk_type<<3|r12.clk_freqSource<<4|r12.defaultval<<6;
+	NT_REG_STRUCT.R12_VAL = r12.val;
+
+	r13.chLSB = ; // How to choose ?
+	r13.chEN = enb;
+	r13.val = r13.chEN|r13.chLSB<<1|r13.defaultval<<2;
+	NT_REG_STRUCT.R13_VAL = r13.val;
+
 
 }
