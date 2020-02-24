@@ -63,7 +63,7 @@ void NT1065()
 	NT_REG_STRUCT.R9_VAL = r9.val;
 
 	r10.Gain_Values = 00000 ; //status Bit
-	r10.val = r9.Gain_Values|r9.defaultval<<5;
+	r10.val = r10.Gain_Values|r10.defaultval<<5;
 	NT_REG_STRUCT.R9_VAL = r9.val;
 
 	r11.defaultval =0;
@@ -86,30 +86,42 @@ void NT1065()
 	NT_REG_STRUCT.R13_VAL = r13.val;
 
 	r14.defaultval=0;
-	r14.val = r14.codech1|r14.defaultval<<7;
+	r14.LPF_codech1=82;
+	r14.val = r14.LPF_codech1|r14.defaultval<<7;
 	NT_REG_STRUCT.R14_VAL = r14.val;
 
-
-
-
-	
-/////// have to do this 
-
-
-
-
-
-
-
-
-
 	r15.defaultval=0;
-	r15.clk_freqSource = plla;
-	r12.clk_type = Lvds;
-	r12.clk_amp = Amp3;
-	r12.clk_type = type1;
-	r12.val = r12.clk_type|r12.clk_amp<<2|r12.clk_type<<3|r12.clk_freqSource<<4|r12.defaultval<<6;
+	r15.ifaAmp = threshold1;
+	r15.ifaRes = mount;
+	r15.rfGain = manGain;
+	r15.ifaGc = type1;
+	r15.ifaOp = DC2;
+	r15.ifaOt = Interface1;
+	r15.val = r15.ifaOt|r15.ifaOp<<2|r15.ifaGc<<3|r15.rfGain<<4|r15.ifaRes<<5|r15.ifaAmp<<6|r15.defaultval<<7;
 	NT_REG_STRUCT.R15_VAL = r15.val;
+
+	r16.defaultval =0;
+	r16.ub_agc = ub3;
+	r16.lb_agc = lb4;
+	r16.val = r16.lb_agc|r16.unused<<3|r16.ub_agc<<4|r16.defaultval<<7;
+	NT_REG_STRUCT.R16_VAL = r16.val;
+
+	r17.unused = 0;
+	r17.rfgainMan = rcG1;
+	r17.ManuGain = 1;
+	r17.val = r17.ManuGain|r17.unused<<2|r17.rfgainMan<<4;
+	NT_REG_STRUCT.R17_VAL = r17.val;
+
+	r18.IfaManGain = 7;
+	r18.IfaGain = 10;
+	r18.val = r18.IfaGain|r18.IfaManGain<<5;
+	NT_REG_STRUCT.R18_VAL = r18.val;
+
+	r19.unused=0;
+	r19.adc_clk = adcty3; 
+	r19.adc_ol = adc3 ;
+	r19.val = r19.adc_ol|r19.adc_clk<<2|r20.unused<<4;
+	NT_REG_STRUCT.R19_VAL = r19.val;
 
 	r20.defaultval=0;
 	r20.ch2LSB = usbch2; 
@@ -118,8 +130,24 @@ void NT1065()
 	NT_REG_STRUCT.R20_VAL = r20.val;
 
 	r21.defaultval=0;
-	r21.val = r21.codech2|r21.defaultval<<7;
+	r21.LPF_codech2 = 72;
+	r21.val = r21.LPF_codech2|r21.defaultval<<7;
 	NT_REG_STRUCT.R21_VAL = r21.val;
+
+	r22.val = r15.val;
+	NT_REG_STRUCT.R22_VAL = r22.val;
+
+	r23.val = r16.val;
+	NT_REG_STRUCT.R23_VAL = r23.val;
+
+	r24.val = r17.val;
+	NT_REG_STRUCT.R24_VAL = r24.val;
+
+	r25.val = r18.val;
+	NT_REG_STRUCT.R25_VAL = r25.val;
+
+	r26.val = r19.val;
+	NT_REG_STRUCT.R26_VAL = r26.val;
 
 	r27.defaultval=0;
 	r27.ch3LSB = usbch3; 
@@ -128,8 +156,24 @@ void NT1065()
 	NT_REG_STRUCT.R27_VAL = r27.val;
 
 	r28.defaultval=0;
-	r28.val = r28.codech3|r28.defaultval<<7;
+	r28.LPF_codech3 = 62;
+	r28.val = r28.LPF_codech3 |r28.defaultval<<7;
 	NT_REG_STRUCT.R28_VAL = r28.val;
+
+	r29.val = r15.val;
+	NT_REG_STRUCT.R29_VAL = r29.val;
+
+	r30.val = r16.val;
+	NT_REG_STRUCT.R30_VAL = r30.val;
+
+	r31.val = r17.val;
+	NT_REG_STRUCT.R23_VAL = r31.val;
+
+	r32.val = r18.val;
+	NT_REG_STRUCT.R32_VAL = r32.val;
+
+	r33.val = r19.val;
+	NT_REG_STRUCT.R33_VAL = r33.val;
 
 	r34.defaultval=0;
 	r34.ch4LSB = lsbch4; 
@@ -138,7 +182,23 @@ void NT1065()
 	NT_REG_STRUCT.R34_VAL = r34.val;
 
 	r35.defaultval=0;
-	r35.val = r35.codech4|r35.defaultval<<7;
+	r35.LPF_codech4 = 32;
+	r35.val = r35.LPF_codech4|r35.defaultval<<7;
 	NT_REG_STRUCT.R35_VAL = r35.val;
+
+	r36.val = r15.val;
+	NT_REG_STRUCT.R36_VAL = r36.val;
+
+	r37.val = r16.val;
+	NT_REG_STRUCT.R37_VAL = r37.val;
+
+	r38.val = r17.val;
+	NT_REG_STRUCT.R23_VAL = r38.val;
+
+	r39.val = r18.val;
+	NT_REG_STRUCT.R39_VAL = r39.val;
+
+	r40.val = r19.val;
+	NT_REG_STRUCT.R40_VAL = r40.val;
 
 }

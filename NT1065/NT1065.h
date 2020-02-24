@@ -242,7 +242,7 @@ typedef enum{
 struct{
 	RF_AG AGC_indicator;
 	RF_GainS gain_value;
-	unsigned short defaultval
+	unsigned short defaultval;
 	unsigned short val;
 }r9;
 
@@ -260,7 +260,7 @@ typedef enum{
 }IFA_GainSt;
 struct{
 	IFA_GainSt Gain_Values;
-	unsigned short defaultval
+	unsigned short defaultval;
 	unsigned short val;
 }r10;
 
@@ -321,7 +321,8 @@ struct{
 
 struct{
 	unsigned short defaultval;
-	unsigned LPF_codech1  = 82;
+	unsigned short LPF_codech1;
+	unsigned short val;
 }r14;
 
 
@@ -361,7 +362,71 @@ struct{
 	unsigned short defaultval;
 	unsigned short val;
 }r15; 
-// same as r22, r29, r36
+
+typedef enum{
+	ub0 = 000,
+	ub1 ,
+	ub2 ,
+	ub3 ,
+	ub4 ,
+	ub5 ,
+	ub6 ,
+	ub7 ,
+}RF_AGC_UB ;
+typedef enum{
+	lb0 = 000,
+	lb1 ,
+	lb2 ,
+	lb3 ,
+	lb4 ,
+	lb5 ,
+	lb6 ,
+	lb7 ,
+}RF_AGC_LB;
+struct{
+	RF_AGC_UB ub_agc;
+	RF_AGC_LB lb_agc;
+	unsigned short defaultval;
+	unsigned short unused;
+	unsigned short val;
+}r16; 
+
+typedef enum{
+	rcG = 0,
+	rcG1 = 15 ,
+}RF_Gain ;
+struct{
+	RF_Gain rfgainMan;
+	unsigned short ManuGain;
+	unsigned short unused;
+	unsigned short val;
+}r17; 
+
+struct{
+	unsigned short IfaManGain;
+	unsigned short IfaGain;
+	unsigned short val;
+}r18;
+
+typedef enum{
+	adcty1=0,
+	adcty2 , 
+	adcty3 , 
+	adcty4 ,
+}IFA_ADC_CLK;
+typedef enum{
+	adc1=0,
+	adc2 , 
+	adc3 ,
+	adc4 ,
+}IFA_ADC_OL;
+struct{
+	IFA_ADC_CLK adc_clk;
+	IFA_ADC_OL adc_ol;
+	unsigned short unused;
+	unsigned short val;
+}r19; 
+
 
 typedef enum{
 	usbch2 = 0,
@@ -380,8 +445,29 @@ struct{
 
 struct{
 	unsigned short defaultval;
-	unsigned LPF_codech2 = 72;
+	unsigned short LPF_codech2;
+	unsigned short val;
 }r21;
+
+struct{
+	unsigned val; // same as r15
+}r22;
+
+struct{
+	unsigned val; // same as r16
+}r23;
+
+struct{
+	unsigned val; // same as r17
+}r24;
+
+struct{
+	unsigned val; // same as r18
+}r25;
+
+struct{
+	unsigned val; // same as r19
+}r26;
 
 typedef enum{
 	usbch3 = 0,
@@ -400,8 +486,29 @@ struct{
 
 struct{
 	unsigned short defaultval;
-	unsigned LPF_codech3 = 62;
+	unsigned short LPF_codech3;
+	unsigned short val;
 }r28;
+
+struct{
+	unsigned val; // same as r15
+}r29;
+
+struct{
+	unsigned val; // same as r16
+}r30;
+
+struct{
+	unsigned val; // same as r17
+}r31;
+
+struct{
+	unsigned val; // same as r18
+}r32;
+
+struct{
+	unsigned val; // same as r19
+}r33;
 
 typedef enum{
 	usbch4 = 0,
@@ -420,20 +527,72 @@ struct{
 
 struct{
 	unsigned short defaultval;
-	unsigned LPF_codech4 = 32;
+	unsigned short LPF_codech4;
+	unsigned short val;
 }r35;
 
+struct{
+	unsigned val; // same as r15
+}r36;
+
+struct{
+	unsigned val; // same as r16
+}r37;
+
+struct{
+	unsigned val; // same as r17
+}r38;
+
+struct{
+	unsigned val; // same as r18
+}r39;
+
+struct{
+	unsigned val; // same as r19
+}r40;
+
+typedef enum{
+	PllaFreq1 =0,
+	PllaFreq2 ,
+}PLL_bandA;
+typedef enum{
+	PllaEn =0,
+	PllaEn ,
+}PLL_enA;
+struct{
+	PLL_bandA freqBandA;
+	PLL_enA enablePllA;
+	unsigned short unused;
+	unsigned short val;
+}r41;
 
 
+struct{
+	unsigned short NdivA;
+	unsigned short unused;
+	unsigned short val;
+}r42;
 
+typedef enum{
+	PllbFreq1 =0,
+	PllbFreq2 ,
+}PLL_bandB;
+typedef enum{
+	PllbEn =0,
+	PllEbn ,
+}PLL_enB;
+struct{
+	PLL_bandA freqBandB;
+	PLL_enA enablePllB;
+	unsigned short unused;
+	unsigned short val;
+}r45;
 
-
-
-
-
-
-
-
+struct{
+	unsigned short NdivB;
+	unsigned short unused;
+	unsigned short val;
+}r46;
 
 
 
