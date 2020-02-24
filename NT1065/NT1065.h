@@ -551,6 +551,9 @@ struct{
 	unsigned val; // same as r19
 }r40;
 
+
+
+////////////////////////  have to do after this 
 typedef enum{
 	PllaFreq1 =0,
 	PllaFreq2 ,
