@@ -6,55 +6,55 @@
  #define UNTITLED_NT1065_H
 
 struct {
-    unsigned long R0_VAL;
-    unsigned long R1_VAL;
-    unsigned long R2_VAL;
-    unsigned long R3_VAL;
-    unsigned long R4_VAL;
-    unsigned long R5_VAL;
-    unsigned long R6_VAL;
-    unsigned long R7_VAL;
-    unsigned long R8_VAL;
-    unsigned long R9_VAL;
-    unsigned long R10_VAL;
-    unsigned long R11_VAL;
-    unsigned long R12_VAL;
-    unsigned long R13_VAL;
-    unsigned long R14_VAL;
-    unsigned long R15_VAL;
-    unsigned long R16_VAL;
-    unsigned long R17_VAL;
-    unsigned long R18_VAL;
-    unsigned long R19_VAL;
-    unsigned long R20_VAL;
-    unsigned long R21_VAL;
-    unsigned long R22_VAL;
-    unsigned long R23_VAL;
-    unsigned long R24_VAL;
-    unsigned long R25_VAL;
-    unsigned long R26_VAL;
-    unsigned long R27_VAL;
-    unsigned long R28_VAL;
-    unsigned long R29_VAL;
-    unsigned long R30_VAL;
-    unsigned long R31_VAL;
-    unsigned long R32_VAL;
-    unsigned long R33_VAL;
-    unsigned long R34_VAL;
-    unsigned long R35_VAL;
-    unsigned long R36_VAL;
-    unsigned long R37_VAL;
-    unsigned long R38_VAL;
-    unsigned long R39_VAL;
-    unsigned long R40_VAL;
-    unsigned long R41_VAL;
-    unsigned long R42_VAL;
-    unsigned long R43_VAL;
-    unsigned long R44_VAL;
-    unsigned long R45_VAL;
-    unsigned long R46_VAL;
-    unsigned long R47_VAL;
-    unsigned long R48_VAL;
+    unsigned short R0_VAL;
+    unsigned short R1_VAL;
+    unsigned short R2_VAL;
+    unsigned short R3_VAL;
+    unsigned short R4_VAL;
+    unsigned short R5_VAL;
+    unsigned short R6_VAL;
+    unsigned short R7_VAL;
+    unsigned short R8_VAL;
+    unsigned short R9_VAL;
+    unsigned short R10_VAL;
+    unsigned short R11_VAL;
+    unsigned short R12_VAL;
+    unsigned short R13_VAL;
+    unsigned short R14_VAL;
+    unsigned short R15_VAL;
+    unsigned short R16_VAL;
+    unsigned short R17_VAL;
+    unsigned short R18_VAL;
+    unsigned short R19_VAL;
+    unsigned short R20_VAL;
+    unsigned short R21_VAL;
+    unsigned short R22_VAL;
+    unsigned short R23_VAL;
+    unsigned short R24_VAL;
+    unsigned short R25_VAL;
+    unsigned short R26_VAL;
+    unsigned short R27_VAL;
+    unsigned short R28_VAL;
+    unsigned short R29_VAL;
+    unsigned short R30_VAL;
+    unsigned short R31_VAL;
+    unsigned short R32_VAL;
+    unsigned short R33_VAL;
+    unsigned short R34_VAL;
+    unsigned short R35_VAL;
+    unsigned short R36_VAL;
+    unsigned short R37_VAL;
+    unsigned short R38_VAL;
+    unsigned short R39_VAL;
+    unsigned short R40_VAL;
+    unsigned short R41_VAL;
+    unsigned short R42_VAL;
+    unsigned short R43_VAL;
+    unsigned short R44_VAL;
+    unsigned short R45_VAL;
+    unsigned short R46_VAL;
+    unsigned short R47_VAL;
+    unsigned short R48_VAL;
 }NT_REG_STRUCT;
 
 typedef enum {
@@ -227,7 +227,9 @@ struct{
 	unsigned short temp_val;
 }r7;
 
-// r8 is same as r7
+struct{
+	unsigned short val;
+}r8;
 
 typedef enum{
 	val1=00,
@@ -257,7 +259,7 @@ typedef enum{
 	Gainval8 = 10111,
 	Gainval9 = 11000,
 	Gainval10 = 11111,
-}IFA_GainSt;
+}IFA_GainSt; // have to review
 struct{
 	IFA_GainSt Gain_Values;
 	unsigned short defaultval;
@@ -551,16 +553,13 @@ struct{
 	unsigned val; // same as r19
 }r40;
 
-
-
-////////////////////////  have to do after this 
 typedef enum{
 	PllaFreq1 =0,
 	PllaFreq2 ,
 }PLL_bandA;
 typedef enum{
-	PllaEn =0,
-	PllaEn ,
+	DisableA =0,
+	EnableA ,
 }PLL_enA;
 struct{
 	PLL_bandA freqBandA;
@@ -577,12 +576,41 @@ struct{
 }r42;
 
 typedef enum{
+	finA=0,
+	startA ,
+}PLLA_exe;
+struct{
+	PLLA_exe pllATuning;
+	unsigned short RDivA;
+	unsigned short NdivRA; 
+	unsigned short unused;
+	unsigned short val;
+}r43;
+
+typedef enum{
+	NotlockedA =0 ,
+	lockedA ,
+}PLLA_L1;
+typedef enum{
+	validA = 0,
+	upperThA ,
+	LowerThA ,
+	unUSEA ,
+}Vco_CVA;
+struct{
+	Vco_CVA VCOAip ;
+	PLLA_L1 pllal1 ;
+	unsigned short unused;
+	unsigned short val;
+}r44;
+
+typedef enum{
 	PllbFreq1 =0,
 	PllbFreq2 ,
 }PLL_bandB;
 typedef enum{
-	PllbEn =0,
-	PllEbn ,
+	DisableB =0,
+	EnableB ,
 }PLL_enB;
 struct{
 	PLL_bandA freqBandB;
@@ -597,72 +625,33 @@ struct{
 	unsigned short val;
 }r46;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+typedef enum{
+	finB=0,
+	startB ,
+}PLLB_exe;
+struct{
+	PLLB_exe pllBTuning ;
+	unsigned short RDivB;
+	unsigned short NdivRB; 
+	unsigned short unused;
+	unsigned short val;
+}r47;
+
+typedef enum{
+	NotlockedB =0 ,
+	lockedB ,
+}PLLB_L1;
+typedef enum{
+	validB = 0,
+	upperThB ,
+	LowerThB ,
+	unUSEB ,
+}Vco_CVB;
+struct{
+	Vco_CVB VCOBip ;
+	PLLB_L1 pllbl1 ;
+	unsigned short unused;
+	unsigned short val;
+}r48;
 
 #endif //UNTITLED_NT1065_H
