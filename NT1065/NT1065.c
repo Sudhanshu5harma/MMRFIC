@@ -3,6 +3,8 @@
 //
 #include "NT1065.h"
 #include "stdio.h"
+
+
 void NT1065()
 {
     r0.defaultval=33;
@@ -215,7 +217,7 @@ void NT1065()
 	r41.val = r41.enablePllA|r41.freqBandA<<1|r41.unused<<2;
 	NT_REG_STRUCT.R41_VAL = r41.val;
 
-	r42.NdivA = 79;
+	r42.NdivA = initData.N;
 	r42.val = r42.NdivA;
 	NT_REG_STRUCT.R42_VAL = r42.val;
 

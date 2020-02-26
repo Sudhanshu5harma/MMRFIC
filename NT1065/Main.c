@@ -8,6 +8,14 @@ void NT1065();
 // } 
 
 void main(){
+	
+	float targetFreqMHz = 1575;
+	
+
 	NT1065();
+	NT1065config(targetFreqMHz);
 	printf("purdue");
 }
+
+
+
