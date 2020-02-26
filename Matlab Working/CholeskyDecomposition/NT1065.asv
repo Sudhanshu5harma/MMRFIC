@@ -1,0 +1,4 @@
+lo = 1.54e9;
+tcxo = 24.84e6;
+R =10;
+N = lo*R/tcxo
