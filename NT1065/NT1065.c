@@ -23,7 +23,7 @@ void NT1065()
 
 
 	r3.defaultval=0;
-	r3.tcxo_Sel = freq1;
+	r3.tcxo_Sel = initData.TCXOfreq;
 	r3.lo_SOURCE = pll_a12b34;
 	r3.val = r3.lo_SOURCE|r3.tcxo_Sel<<1|r3.defaultval<<2;
 	NT_REG_STRUCT.R3_VAL = r3.val;	
