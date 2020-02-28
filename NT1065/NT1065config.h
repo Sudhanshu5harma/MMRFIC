@@ -4,5 +4,6 @@ typedef struct
 	unsigned short R; // for cal Freq of Lo
 	unsigned short C; // for calculating clock freq
 	unsigned short TCXOfreq;
+	unsigned short 	signalLOConfig
 
 }NT_CONFIG;
