@@ -30,7 +30,7 @@ void NT1065config(float targetFreqMHz)
 // PLL"A" write REG41 and for PLL"B" REG45
 	PllBand = 1 ; //REG41 0->L2/L3/L5, 1->L1 
 	initData.PllBand = PllBand; 
-	N1 = 
+	N = 
 	initData.N1 = N1; // REG42 for PLL"A" and REG46 for PLL"B"
 	initData.N2 = N2; // REG43 for PLL"A" and REG47 for PLL"B"
 	initData.R = R; // REG
