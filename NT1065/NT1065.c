@@ -3,7 +3,9 @@
 //
 #include "NT1065.h"
 #include "stdio.h"
+#include "NT1065config.h"
 
+extern NT_CONFIG initData ;
 
 void NT1065()
 {
@@ -96,8 +98,8 @@ void NT1065()
 	NT_REG_STRUCT.R13_VAL = r13.val;
 
 	r14.defaultval=0;
-	r14.LPF_codech1=82;
-	r14.val = r14.LPF_codech1|r14.defaultval<<7;
+	r14.if_pass_band=passband14;
+	r14.val = r14.if_pass_band|r14.defaultval<<7;
 	NT_REG_STRUCT.R14_VAL = r14.val;
 
 	r15.defaultval=0;

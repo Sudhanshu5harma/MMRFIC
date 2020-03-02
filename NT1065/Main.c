@@ -1,6 +1,7 @@
  #include"stdio.h"
  #include "NT1065.h"
 
+void NT1065config(long targetFreqMHz);
 void NT1065();
 
 // 	printf("Run");
@@ -9,10 +10,9 @@ void NT1065();
 
 void main(){
 	
-	float targetFreqMHz = 1575;
+	long targetFreqMHz = 1575000000;
 	
 
-	NT1065();
 	NT1065config(targetFreqMHz);
 	
 } 	
