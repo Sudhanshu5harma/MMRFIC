@@ -394,8 +394,22 @@ struct{
 }r16; 
 
 typedef enum{
-	rcG = 0,
-	rcG1 = 15 ,
+	rcG0 = 0, //12.00
+	rcG1 ,   //12.950
+	rcG2 ,   //13.900
+	rcG3 ,   //14.850
+	rcG4 ,   //15.800
+	rcG5 ,   //16.750
+	rcG6 ,   //17.700
+	rcG7 ,   //18.650
+	rcG8 ,   //19.600
+	rcG9 ,   //21.500
+	rcG10 ,   //22.450
+	rcG11 ,   //23.400
+	rcG12,   //24.350
+	rcG13 ,   //25.300
+	rcG14 ,   //26.250
+	rcG15 ,  //26.500    
 }RF_Gain ;
 struct{
 	RF_Gain rfgainMan;
