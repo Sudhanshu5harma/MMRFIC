@@ -16,7 +16,11 @@ void NT1065config(float targetFreqMHz)
 	unsigned short ADCoutput;
 	unsigned short Adctype;
 	unsigned short PPLSel;
-	unsigned short 
+	unsigned short LPFCali;
+	unsigned short PllBand;
+	unsigned short X;
+	unsigned short freqclk;
+	unsigned short TempMode;
 	
 	PPLSel = 1; // REG2[1-0] 0->standby, 1->PLL"A", 2->PLL"B",3->Active
 	initData.PPLSel = PPLSel; //REG12
@@ -26,7 +30,7 @@ void NT1065config(float targetFreqMHz)
 	TCXOfreq = 1; //REG3[1] 0->10MHz 1->24.84
 	initData.TCXOfreq = TCXOfreq; //REG3[1]
 //7.2 calculate value of N and R		
-	R = ; // to assign the value of R(1,15)
+	R = 1; // to assign the value of R(1,15)
 	N = targetFreqMHz * R/TCXOfreq; // value of N(48,511)
 // PLL"A" write REG41 and for PLL"B" REG45
 	PllBand = 1 ; //REG41[1] 0->L2/L3/L5, 1->L1 
@@ -44,14 +48,15 @@ void NT1065config(float targetFreqMHz)
 	initData.signalLOConfigB = signalLOConfigB;
 //7.4 RF AGC CONFIGURATION 
 	rfAgc = rcG0; // REG17[7-4] see enum for REG17 to assign value 
-		
+	initData.rfAgc =rfAgc;	
 //7.5 // nothing is needed
 
-//7.6 //nothing is needed //table and ask gana too
-
-	//7.7 // "0" analog differential  "1" 2-bit ADC output R15 
-	ADCoutput = 1; // REG15
-	X  = ; // give value
+//7.6 //nothing is needed 
+	LPFCali = passband4; //REG14[6-0] for channel "A" then REG21,REG28,REG35
+	initData.LPFCali = LPFCali;
+//7.7 // "0" analog differential  "1" 2-bit ADC output R15 
+	ADCoutput = 1; // REG15[0]
+	X  = 1 ; // give value
 	if (ADCoutput==1)
 		{
 		switch (X)
@@ -64,7 +69,7 @@ void NT1065config(float targetFreqMHz)
 	}
 
 	// 7.8
-	freqclk = ;// give freq
+	freqclk = 12;// give freq
 	C = targetFreqMHz/2*freqclk;
 	// C can be from value 8 - 31 with step 1 
 	// select PPL "A" - 0, PLL "B" - 1
@@ -80,15 +85,4 @@ void NT1065config(float targetFreqMHz)
 	initData.PPLSel = PPLSel; //REG12
 	initData.Adctype=Adctype; //REG19
 	initData.ADCoutput=ADCoutput; // REG15
-	initData.rfAgc=rfAgc;  // REG17
-	initData.signalLOConfigB = signalLOConfigB; // REG45
-	initData.signalLOConfigA = signalLOConfigA;// REG3 
-	initData.TCXOfreq = TCXOfreq;
-	initData.N = N;
-	initData.R = R;
-
-
-
-
-
 }

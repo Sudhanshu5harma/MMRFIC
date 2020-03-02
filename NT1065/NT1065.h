@@ -320,10 +320,35 @@ struct{
 	unsigned short val;
 }r13; 
 
-
+typedef	enum{
+	passband1 = 0,
+    passband2 = 21,
+    passband3 = 22,
+    passband4 = 24,
+    passband5 = 27,
+    passband6 = 30,
+    passband7 = 33,
+    passband8 = 36,
+    passband9 = 39,
+    passband10 = 42,
+    passband11 = 45,
+    passband12 = 48,
+    passband13 = 51,
+    passband14 = 54,
+    passband15 = 57,
+    passband16 = 60,
+    passband17 = 63,
+    passband18 = 66,
+    passband19 = 69,
+    passband20 = 72,
+    passband21 = 75,
+    passband22 = 77,
+    passband23 = 78,
+    passband24 = 127,
+}LPF_code;
 struct{
+	LPF_code if_pass_band;
 	unsigned short defaultval;
-	unsigned short LPF_codech1;
 	unsigned short val;
 }r14;
 
