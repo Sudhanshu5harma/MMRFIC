@@ -19,14 +19,14 @@ void NT1065()
 	NT_REG_STRUCT.R1_VAL = r1.val;
 
 	r2.defaultval=0;
-	r2.icMODE = pll_active;
+	r2.icMODE = initData.PPLSel;//pll_active;
 	r2.val = r2.icMODE|r2.defaultval<<2;
 	NT_REG_STRUCT.R2_VAL = r2.val;
 
 
 	r3.defaultval=0;
 	r3.tcxo_Sel = initData.TCXOfreq;
-	r3.lo_SOURCE = pll_a12b34;
+	r3.lo_SOURCE = initData.signalLOConfigA;//pll_a12b34;
 	r3.val = r3.lo_SOURCE|r3.tcxo_Sel<<1|r3.defaultval<<2;
 	NT_REG_STRUCT.R3_VAL = r3.val;	
 
@@ -41,7 +41,7 @@ void NT1065()
 	r5.defaultval=0;
 	r5.chanSel = ch1;
 	r5.unused = 0;
-	r5.tempMode = single;
+	r5.tempMode = initData.TempMode;//single;
 	r5.tempSystem = finish1;
 	r5.val = r5.tempSystem|r5.tempMode<<1|r5.unused<<2|r5.chanSel<<3|r5.defaultval<<4;
 	NT_REG_STRUCT.R5_VAL = r5.val;	
@@ -78,12 +78,12 @@ void NT1065()
 	NT_REG_STRUCT.R9_VAL = r9.val;
 
 	r11.defaultval =0;
-	r11.clckratio = 15;
+	r11.clckratio = initData.C;//15;
 	r11.val = r11.clckratio|r11.defaultval<<5;
 	NT_REG_STRUCT.R11_VAL = r11.val;
 
 	r12.defaultval=0;
-	r12.clk_freqSource = plla;
+	r12.clk_freqSource = initData.PPLSel;//plla;
 	r12.clk_type = Lvds;
 	r12.clk_amp = Amp3;
 	r12.clk_type1 = type1;
@@ -98,7 +98,7 @@ void NT1065()
 	NT_REG_STRUCT.R13_VAL = r13.val;
 
 	r14.defaultval=0;
-	r14.if_pass_band=passband14;
+	r14.if_pass_band=initData.LPFCali;//passband14;
 	r14.val = r14.if_pass_band|r14.defaultval<<7;
 	NT_REG_STRUCT.R14_VAL = r14.val;
 
@@ -108,7 +108,7 @@ void NT1065()
 	r15.rfGain = manGain;
 	r15.ifaGc = autoGainCon;
 	r15.ifaOp = DC2;
-	r15.ifaOt = Interface1;
+	r15.ifaOt = initData.ADCoutput;//Interface1;
 	r15.val = r15.ifaOt|r15.ifaOp<<1|r15.ifaGc<<3|r15.rfGain<<4|r15.ifaRes<<5|r15.ifaAmp<<6|r15.defaultval<<7;
 	NT_REG_STRUCT.R15_VAL = r15.val;
 
@@ -119,7 +119,7 @@ void NT1065()
 	NT_REG_STRUCT.R16_VAL = r16.val;
 
 	r17.unused = 0;
-	r17.rfgainMan = rcG1;
+	r17.rfgainMan =initData.rfAgc;// rcG1;
 	r17.ManuGain = 1;
 	r17.val = r17.ManuGain|r17.unused<<2|r17.rfgainMan<<4;
 	NT_REG_STRUCT.R17_VAL = r17.val;
@@ -130,7 +130,7 @@ void NT1065()
 	NT_REG_STRUCT.R18_VAL = r18.val;
 
 	r19.unused=0;
-	r19.adc_clk = adcty3; 
+	r19.adc_clk = initData.Adctype;//adcty3; 
 	r19.adc_ol = adc3 ;
 	r19.val = r19.adc_ol|r19.adc_clk<<2|r19.unused<<4;
 	NT_REG_STRUCT.R19_VAL = r19.val;
@@ -214,18 +214,18 @@ void NT1065()
 	NT_REG_STRUCT.R40_VAL = r40.val;
 
 	r41.unused=0;
-	r41.freqBandA = PllaFreq2;
+	r41.freqBandA = initData.PllBand;//PllaFreq2;
 	r41.enablePllA = EnableA ;
 	r41.val = r41.enablePllA|r41.freqBandA<<1|r41.unused<<2;
 	NT_REG_STRUCT.R41_VAL = r41.val;
 
-	r42.NdivA = initData.N;
+	r42.NdivA = initData.N1;
 	r42.val = r42.NdivA;
 	NT_REG_STRUCT.R42_VAL = r42.val;
 
 	r43.unused = 0;
-	r43.RDivA = 1;
-	r43.NdivRA = 1;
+	r43.RDivA = initData.R;//1;
+	r43.NdivRA = initData.N2;//1;
 	r43.pllATuning= startA ;
 	r43.val = r43.pllATuning|r43.unused<<1|r43.RDivA<<3|r43.NdivRA<<7;
 	NT_REG_STRUCT.R43_VAL = r43.val;
@@ -238,7 +238,7 @@ void NT1065()
 
 	r45.unused=0;
 	r45.freqBandB = PllbFreq1;
-	r45.enablePllB = EnableB ;
+	r45.enablePllB = initData.signalLOConfigB ;//EnableB ;
 	r45.val = r45.enablePllB|r45.freqBandB<<1|r45.unused<<2;
 	NT_REG_STRUCT.R45_VAL = r45.val;
 
@@ -258,6 +258,10 @@ void NT1065()
 	r48.pllbl1 = lockedB ; // status
 	r48.val = r48.pllbl1|r48.VCOBip<<1|r48.unused<<3;
 	NT_REG_STRUCT.R48_VAL = r48.val;
+
+	NT_REG_STRUCT.R67_VAL = 0xCD;
+
+	NT_REG_STRUCT.R68_VAL = 0X8A;
 
 	// printf("r31:%d\n",r31.val);
 	// printf("r32:%d\n",r32.val);

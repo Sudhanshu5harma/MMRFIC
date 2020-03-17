@@ -84,9 +84,10 @@ void NT1065config(long targetFreqMHz)
 	// 7.10 
 	TempMode = 1; // 1 for continous and 0 for single 
 
-	initData.TempMode = TempMode; // REG15 D[0]
+	initData.TempMode = TempMode; // REG5 D[0]
 	initData.C=C; //REG11
 	initData.PPLSel = PPLSel; //REG12
 	initData.Adctype=Adctype; //REG19
 	initData.ADCoutput=ADCoutput; // REG15
 }
+

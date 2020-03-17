@@ -55,6 +55,8 @@ struct {
     unsigned short R46_VAL;
     unsigned short R47_VAL;
     unsigned short R48_VAL;
+    unsigned short R67_VAL;
+    unsigned short R68_VAL;
 }NT_REG_STRUCT;
 
 typedef enum {
@@ -107,6 +109,8 @@ typedef enum {
     R46_ADDR ,
     R47_ADDR ,
     R48_ADDR ,
+    R67_ADDR = 67 ,
+    R68_ADDR ,
 }NT_ADDR_STRUCT;
 
 struct {
