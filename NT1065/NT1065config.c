@@ -31,16 +31,16 @@ void NT1065config(long targetFreqMHz)
 	initData.TCXOfreq = TCXOfreq; //REG3[1]
 	// printf("%d",TCXOfreq);
 //7.2 calculate value of N and R		
-	R = 2; // to assign the value of R(1,15)
+	R = 1; // to assign the value of R(1,15)
 	N = targetFreqMHz * R/TCXOfreq; // value of N(48,511)
-	printf("%d",N);
+	printf("The value of N for freq [24,511] is %d ", N);
 // PLL"A" write REG41 and for PLL"B" REG45
 	PllBand = 1 ; //REG41[1] 0->L2/L3/L5, 1->L1 
 	initData.PllBand = PllBand; 
 	N2 = N&256; // '100000000' is 256
 	N2 = N2>>8;
 	N1 = N&255; // '11111111' is 255
-	printf("value of N1 %d, value of N2 %d",N1,N2);
+	printf("value of N1 %d, value of N2 %d ",N1,N2);
 	initData.N1 = N1; // REG42[7-0] for PLL"A" and REG46[7-0] for PLL"B"
 	initData.N2 = N2; // REG43[7] for PLL"A" and REG47[7] for PLL"B"
 	initData.R = R; // REG43[6-3] for PLL"A" and REG47[6-3] for PLL"B"
