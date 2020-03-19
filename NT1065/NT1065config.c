@@ -22,12 +22,13 @@ void NT1065config(long targetFreqMHz)
 	unsigned short freqclk;
 	unsigned short TempMode;
 	
-	PPLSel = 1; // REG2[1-0] 0->standby, 1->PLL"A", 2->PLL"B",3->Active
-	initData.PPLSel = PPLSel; //REG12
+//	PPLSel = 1; // REG2[1-0] 0->standby, 1->PLL"A", 2->PLL"B",3->Active
+//	initData.PPLSel = PPLSel; //REG12
 //7.1
 // Default delected to 10MHz Freqtcxo
 // Freq =  24.84MHz
-	TCXOfreq = 10000000; //REG3[1] 0->10MHz 1->24.84
+	TCXOfreqVa = 10000000; 
+	TCXOfreq = 0; //REG3[1] 0->10MHz 1->24.84
 	initData.TCXOfreq = TCXOfreq; //REG3[1]
 	// printf("%d",TCXOfreq);
 //7.2 calculate value of N and R		
