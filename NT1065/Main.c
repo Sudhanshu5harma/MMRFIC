@@ -10,9 +10,8 @@ void NT1065();
 
 void main(){
 	
-	long targetFreqMHz = 1575000000;
+	long targetFreqMHz = 16368000;
 	
-
 	NT1065config(targetFreqMHz);
 	
 } 	

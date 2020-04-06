@@ -17,4 +17,6 @@ typedef struct
 	unsigned short X;
 	unsigned short freqclk;
 	unsigned short TempMode;
+	unsigned short valueofREG67;
+	unsigned short valueofREG68;
 }NT_CONFIG;

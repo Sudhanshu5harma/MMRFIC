@@ -113,21 +113,23 @@ typedef enum {
     R68_ADDR ,
 }NT_ADDR_STRUCT;
 
+//Structure and enum for REG0
 struct {
     unsigned short defaultval;
     unsigned short val;
 }r0;
 
+//Structure and enum for REG1
 struct {
     unsigned short defaultval;
     unsigned short val;
 }r1;
 
-
+//Structure and enum for REG2
 typedef enum{
 	standby =0,
 	pll_a_only,
-	plla_only,
+	pll_b_only,
 	pll_active,
 }IC_mode;
 struct{
@@ -136,9 +138,10 @@ struct{
 	unsigned short val;
 }r2;
 
+//Structure and enum for REG3
 typedef enum{
-	freq1 = 0,
-	freq2 ,
+	freq10p0 = 0,
+	freq24p84 ,
 }TCXO_sel;
 typedef enum{
 	pll_allch = 0,
@@ -151,6 +154,7 @@ struct{
 	unsigned short val;
 }r3;
 
+//Structure and enum for REG4
 typedef enum{
 	error = 0,
 	success ,
@@ -166,6 +170,7 @@ struct{
 	unsigned short val;
 }r4;
 
+//Structure and enum for REG5
 typedef enum{
 	ch1 = 0,
 	ch2 ,
@@ -189,6 +194,7 @@ struct{
 	unsigned short val;
 }r5;
 
+//Structure and enum for REG6
 typedef enum{
 	forbid1=0,
 	permit1 ,
@@ -219,6 +225,7 @@ struct{
 	unsigned short val;
 }r6;
 
+//Structure and enum for REG7
 typedef enum{
 	fail=0,
 	valid ,
@@ -231,10 +238,12 @@ struct{
 	unsigned short temp_val;
 }r7;
 
+//Structure and enum for REG8
 struct{
 	unsigned short val;
 }r8;
 
+//Structure and enum for REG9
 typedef enum{
 	val1=00,
 	val2 ,
@@ -252,34 +261,37 @@ struct{
 	unsigned short val;
 }r9;
 
+//Structure and enum for REG10
 typedef enum{
-	Gainval1 = 00000,
-	Gainval2 = 00011,
-	Gainval3 = 00111,
-	Gainval4 = 01010,
-	Gainval5 = 01110,
-	Gainval6 = 10001,
-	Gainval7 = 10101,
-	Gainval8 = 10111,
-	Gainval9 = 11000,
-	Gainval10 = 11111,
-}IFA_GainSt; // have to review
+	GainvalT0 = 00000,
+	GainvalT3 = 00011,
+	GainvalT7 = 00111,
+	GainvalT10 = 01010,
+	GainvalT14 = 01110,
+	GainvalT17 = 10001,
+	GainvalT21 = 10101,
+	GainvalT23 = 10111,
+	GainvalT24 = 11000,
+	GainvalT31 = 11111,
+}IFA_GainSt; // ----------------------want to get reviewed-----------------------------------
 struct{
 	IFA_GainSt Gain_Values;
 	unsigned short defaultval;
 	unsigned short val;
 }r10;
 
+//Structure and enum for REG11
 typedef enum{
 	ratio1 = 01000,
-	ratio2 = 11111,
-}CDIV_R;
+	ratio2 = 11111, 
+}CDIV_R; // ----------------------want to get reviewed-----------------------------------
 struct{
 	CDIV_R clckratio;
 	unsigned short defaultval;
 	unsigned short val;
 }r11;
 
+//Structure and enum for REG12
 typedef enum{
 	plla=0,
 	pllb ,
@@ -299,7 +311,7 @@ typedef enum{
 	type2 ,
 	type3 ,
 	type4,
-}CLK_OL;
+}CLK_OL;// ----------------------want to get reviewed-----------------------------------
 struct{
 	CLK_Source clk_freqSource;
 	CLK_TP clk_type;
@@ -309,6 +321,7 @@ struct{
 	unsigned short val;
 }r12;
 
+//Structure and enum for REG13
 typedef enum{
 	usb = 0,
 	lsb,
@@ -324,31 +337,32 @@ struct{
 	unsigned short val;
 }r13; 
 
+//Structure and enum for REG14
 typedef	enum{
-	passband1 = 0,
-    passband2 = 21,
-    passband3 = 22,
-    passband4 = 24,
-    passband5 = 27,
-    passband6 = 30,
-    passband7 = 33,
-    passband8 = 36,
-    passband9 = 39,
-    passband10 = 42,
-    passband11 = 45,
-    passband12 = 48,
-    passband13 = 51,
-    passband14 = 54,
-    passband15 = 57,
-    passband16 = 60,
-    passband17 = 63,
-    passband18 = 66,
-    passband19 = 69,
-    passband20 = 72,
-    passband21 = 75,
-    passband22 = 77,
-    passband23 = 78,
-    passband24 = 127,
+	passband11p22 = 0,
+    passband14p83 = 21,
+    passband15p12 = 22,
+    passband15p69 = 24,
+    passband16p59 = 27,
+    passband17p60 = 30,
+    passband18p33 = 33,
+    passband19p36 = 36,
+    passband20p31 = 39,
+    passband21p13 = 42,
+    passband21p92 = 45,
+    passband22p89 = 48,
+    passband23p82 = 51,
+    passband24p94 = 54,
+    passband25p45 = 57,
+    passband26p50 = 60,
+    passband27p38 = 63,
+    passband28p31 = 66,
+    passband29p02 = 69,
+    passband29p64 = 72,
+    passband30p47 = 75,
+    passband31p19 = 77,
+    passband31p55 = 78,
+    passband43p41 = 127,
 }LPF_code;
 struct{
 	LPF_code if_pass_band;
@@ -356,10 +370,10 @@ struct{
 	unsigned short val;
 }r14;
 
-
+//Structure and enum for REG15
 typedef enum{
-	threshold1 = 0,
-	threshold2 ,
+	threshold200 = 0,
+	threshold400,
 }IFA_Amp;
 typedef enum{
 	not_mount = 0,
@@ -374,10 +388,10 @@ typedef enum{
 	autoGainCon,
 }IFA_GC;
 typedef enum{
-	DC1 = 0,
-	DC2 ,
-	DC3 ,
-	DC4 ,
+	DC1p55 = 0,
+	DC1p75 ,
+	DC1p90 ,
+	DC2p00 ,
 }IFA_OP;
 typedef enum{
 	Interface1 = 0,
@@ -394,25 +408,26 @@ struct{
 	unsigned short val;
 }r15; 
 
+//Structure and enum for REG16
 typedef enum{
-	ub0 = 000,
-	ub1 ,
-	ub2 ,
-	ub3 ,
-	ub4 ,
-	ub5 ,
-	ub6 ,
-	ub7 ,
+	ubM47 = 000,
+	ubM45 ,
+	ubM43 ,
+	ubM42 ,
+	ubM41 ,
+	ubM40 ,
+	ubNVR1 ,
+	ubNVR2 ,
 }RF_AGC_UB ;
 typedef enum{
-	lb0 = 000,
-	lb1 ,
-	lb2 ,
-	lb3 ,
-	lb4 ,
-	lb5 ,
-	lb6 ,
-	lb7 ,
+	lbNVR1 = 000,
+	lbNVR2 ,
+	lbNVR3 ,
+	lbM49 ,
+	lbM46 ,
+	lbM45 ,
+	lbM43 ,
+	lbM42 ,
 }RF_AGC_LB;
 struct{
 	RF_AGC_UB ub_agc;
@@ -422,23 +437,24 @@ struct{
 	unsigned short val;
 }r16; 
 
+//Structure and enum for REG17
 typedef enum{
-	rcG0 = 0, //12.00
-	rcG1 ,   //12.950
-	rcG2 ,   //13.900
-	rcG3 ,   //14.850
-	rcG4 ,   //15.800
-	rcG5 ,   //16.750
-	rcG6 ,   //17.700
-	rcG7 ,   //18.650
-	rcG8 ,   //19.600
-	rcG9 ,   //21.500
-	rcG10 ,   //22.450
-	rcG11 ,   //23.400
-	rcG12,   //24.350
-	rcG13 ,   //25.300
-	rcG14 ,   //26.250
-	rcG15 ,  //26.500    
+	rcG12p00 = 0,
+	rcG12p95,
+	rcG13p90,
+	rcG14p85,
+	rcG15p80,
+	rcG16p75,
+	rcG17p70,
+	rcG18p65,
+	rcG19p60,
+	rcG21p50,
+	rcG22p45,
+	rcG23p40,
+	rcG24p35,
+	rcG25p30,
+	rcG26p25,
+	rcG26p50,    
 }RF_Gain ;
 struct{
 	RF_Gain rfgainMan;
@@ -447,12 +463,14 @@ struct{
 	unsigned short val;
 }r17; 
 
+//Structure and enum for REG18
 struct{
 	unsigned short IfaManGain;
 	unsigned short IfaGain;
 	unsigned short val;
-}r18;
+}r18; // --------------------------- Review ones as i am just taking the values and puting in .c file
 
+//Structure and enum for REG19
 typedef enum{
 	adcty1=0,
 	adcty2 , 
@@ -472,7 +490,7 @@ struct{
 	unsigned short val;
 }r19; 
 
-
+//Structure and enum for REG20
 typedef enum{
 	usbch2 = 0,
 	lsbch2,
@@ -488,32 +506,39 @@ struct{
 	unsigned short val;
 }r20; 
 
+//Structure and enum for REG21
 struct{
 	unsigned short defaultval;
 	unsigned short LPF_codech2;
 	unsigned short val;
 }r21;
 
+//Structure and enum for REG22
 struct{
 	unsigned val; // same as r15
 }r22;
 
+//Structure and enum for REG23
 struct{
 	unsigned val; // same as r16
 }r23;
 
+//Structure and enum for REG24
 struct{
 	unsigned val; // same as r17
 }r24;
 
+//Structure and enum for REG25
 struct{
 	unsigned val; // same as r18
 }r25;
 
+//Structure and enum for REG26
 struct{
 	unsigned val; // same as r19
 }r26;
 
+//Structure and enum for REG27
 typedef enum{
 	usbch3 = 0,
 	lsbch3,
@@ -529,32 +554,39 @@ struct{
 	unsigned short val;
 }r27;
 
+//Structure and enum for REG28
 struct{
 	unsigned short defaultval;
 	unsigned short LPF_codech3;
 	unsigned short val;
 }r28;
 
+//Structure and enum for REG29
 struct{
 	unsigned val; // same as r15
 }r29;
 
+//Structure and enum for REG30
 struct{
 	unsigned val; // same as r16
 }r30;
 
+//Structure and enum for REG31
 struct{
 	unsigned val; // same as r17
 }r31;
 
+//Structure and enum for REG32
 struct{
 	unsigned val; // same as r18
 }r32;
 
+//Structure and enum for REG33
 struct{
 	unsigned val; // same as r19
 }r33;
 
+//Structure and enum for REG34
 typedef enum{
 	usbch4 = 0,
 	lsbch4,
@@ -570,32 +602,39 @@ struct{
 	unsigned short val;
 }r34;
 
+//Structure and enum for REG35
 struct{
 	unsigned short defaultval;
 	unsigned short LPF_codech4;
 	unsigned short val;
 }r35;
 
+//Structure and enum for REG36
 struct{
 	unsigned val; // same as r15
 }r36;
 
+//Structure and enum for REG37
 struct{
 	unsigned val; // same as r16
 }r37;
 
+//Structure and enum for REG38
 struct{
 	unsigned val; // same as r17
 }r38;
 
+//Structure and enum for REG39
 struct{
 	unsigned val; // same as r18
 }r39;
 
+//Structure and enum for REG40
 struct{
 	unsigned val; // same as r19
 }r40;
 
+//Structure and enum for REG41
 typedef enum{
 	PllaFreq1 =0,
 	PllaFreq2 ,
@@ -611,13 +650,14 @@ struct{
 	unsigned short val;
 }r41;
 
-
+//Structure and enum for REG42
 struct{
 	unsigned short NdivA;
 	unsigned short unused;
 	unsigned short val;
 }r42;
 
+//Structure and enum for REG43
 typedef enum{
 	finA=0,
 	startA ,
@@ -630,6 +670,7 @@ struct{
 	unsigned short val;
 }r43;
 
+//Structure and enum for REG44
 typedef enum{
 	NotlockedA =0 ,
 	lockedA ,
@@ -647,6 +688,7 @@ struct{
 	unsigned short val;
 }r44;
 
+//Structure and enum for REG45
 typedef enum{
 	PllbFreq1 =0,
 	PllbFreq2 ,
@@ -662,12 +704,14 @@ struct{
 	unsigned short val;
 }r45;
 
+//Structure and enum for REG46
 struct{
 	unsigned short NdivB;
 	unsigned short unused;
 	unsigned short val;
 }r46;
 
+//Structure and enum for REG47
 typedef enum{
 	finB=0,
 	startB ,
@@ -680,6 +724,7 @@ struct{
 	unsigned short val;
 }r47;
 
+//Structure and enum for REG48
 typedef enum{
 	NotlockedB =0 ,
 	lockedB ,

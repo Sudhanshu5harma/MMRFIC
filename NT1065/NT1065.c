@@ -25,7 +25,7 @@ void NT1065()
 
 
 	r3.defaultval=0;
-	r3.tcxo_Sel = initData.TCXOfreq;
+	r3.tcxo_Sel = freq10p0;
 	r3.lo_SOURCE = initData.signalLOConfigA;//pll_a12b34;
 	r3.val = r3.lo_SOURCE|r3.tcxo_Sel<<1|r3.defaultval<<2;
 	NT_REG_STRUCT.R3_VAL = r3.val;	
@@ -90,7 +90,6 @@ void NT1065()
 	r12.val = r12.clk_type1|r12.clk_amp<<2|r12.clk_type<<4|r12.clk_freqSource<<5|r12.defaultval<<6;
 	NT_REG_STRUCT.R12_VAL = r12.val;
 
-
 	r13.defaultval=0;
 	r13.chLSB = lsb; 
 	r13.chEN = enb;
@@ -103,18 +102,18 @@ void NT1065()
 	NT_REG_STRUCT.R14_VAL = r14.val;
 
 	r15.defaultval=0;
-	r15.ifaAmp = threshold1;
+	r15.ifaAmp = threshold400;
 	r15.ifaRes = mount;
 	r15.rfGain = manGain;
 	r15.ifaGc = autoGainCon;
-	r15.ifaOp = DC2;
+	r15.ifaOp = DC1p75;
 	r15.ifaOt = initData.ADCoutput;//Interface1;
 	r15.val = r15.ifaOt|r15.ifaOp<<1|r15.ifaGc<<3|r15.rfGain<<4|r15.ifaRes<<5|r15.ifaAmp<<6|r15.defaultval<<7;
 	NT_REG_STRUCT.R15_VAL = r15.val;
 
 	r16.defaultval =0;
-	r16.ub_agc = ub3;
-	r16.lb_agc = lb4;
+	r16.ub_agc = ubM42;
+	r16.lb_agc = lbM46;
 	r16.val = r16.lb_agc|r16.unused<<3|r16.ub_agc<<4|r16.defaultval<<7;
 	NT_REG_STRUCT.R16_VAL = r16.val;
 
@@ -259,9 +258,9 @@ void NT1065()
 	r48.val = r48.pllbl1|r48.VCOBip<<1|r48.unused<<3;
 	NT_REG_STRUCT.R48_VAL = r48.val;
 
-	NT_REG_STRUCT.R67_VAL = 0xCD;
+	NT_REG_STRUCT.R67_VAL = initData.valueofREG67;
 
-	NT_REG_STRUCT.R68_VAL = 0X8A;
+	NT_REG_STRUCT.R68_VAL = initData.valueofREG68;
 
 	// printf("r31:%d\n",r31.val);
 	// printf("r32:%d\n",r32.val);
