@@ -27,7 +27,7 @@ quad1 = (re < 0)*2+(im < 0);  % Quadrant information
 re = abs(re);
 im = abs(im);
 
-wtArray = 2.^(-[0:numIter-1]);
+wtArray = 2.^(-(0:numIter-1));
 angArray = quantize1(atan(wtArray),32,1,'unsigned','round');
 ang = 0;
 signn = sign(im);

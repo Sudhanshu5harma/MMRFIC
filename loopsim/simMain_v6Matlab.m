@@ -47,7 +47,7 @@ DAC_flt_type  = 'butterworth';    % DAC filter type
 DAC_step_size = 0.01;             % step size for Gain control
 [DAC_filt_num, DAC_filt_den] = butter(DAC_flt_ord,2*pi*DAC_flt_fc,'s');
 DAC_filt_sys = tf(DAC_filt_num,DAC_filt_den);   % octave version
-%DAC_filt_sys = tf([DAC_filt_num; DAC_filt_den]);    % Matlab version
+%   DAC_filt_sys = tf([DAC_filt_num; DAC_filt_den]);    % Matlab version
 DAC_Ni = 1;
 DAC_Nt = ceil(DAC_ENOB+DAC_Ni);          % 1 sign bit is assumed 
 FLT_SCALE_ADJ = 1.0; %1.11  % scaling factor needed at the filter output to compensate for attenuation in lsim()
@@ -178,7 +178,7 @@ for exptIndex = 1:numExpts
     timeVec =  (startIndexDAC+1:startIndexDAC+ADCnum)/(ADC_fs+ADC_CLK_PPM*1e-6*ADC_fs);
     sigVec = reshape(repmat(scaledSig,ADC_DAC_OSR,1),1,ADC_DAC_OSR*DACnum);
     %[filtOut, timeVec1, filtStateDAC] = lsim(DAC_filt_sys, sigVec, timeVec, filtStateDAC);
-    [filtOut, timeVec1] = lsim(DAC_filt_sys, sigVec, timeVec, filtStateDAC);
+    [filtOut, timeVec1] = lsim(DAC_filt_sys, sigVec, timeVec-timeVec(1), filtStateDAC);
     startIndexDAC = startIndexDAC+ADCnum;
     %filtStateDAC = filtStateDAC(end,:);    % keep only the last value in the state
     
@@ -192,7 +192,7 @@ for exptIndex = 1:numExpts
     timeVec2 =  (startIndexPGA+1:startIndexPGA+ADCnum)/(ADC_fs+ADC_CLK_PPM*1e-6*ADC_fs);
     sigVec = adcInput; %reshape(repmat(scaledSig,ADC_DAC_OSR,1),1,ADC_DAC_OSR*DACnum);
     %[pgafiltOut, timeVec3, filtStatePGA] = lsim(PGA_filt_sys, sigVec, timeVec2, filtStatePGA);
-    [pgafiltOut, timeVec3] = lsim(PGA_filt_sys, sigVec, timeVec2, filtStatePGA);
+    [pgafiltOut, timeVec3] = lsim(PGA_filt_sys, sigVec, timeVec2-timeVec2(1), filtStatePGA);
     startIndexPGA = startIndexPGA+ADCnum;
     %filtStatePGA = filtStatePGA(end,:);    % keep only the last value in the state
 

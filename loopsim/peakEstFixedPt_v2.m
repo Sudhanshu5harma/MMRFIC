@@ -15,11 +15,11 @@
 %%
 %%  1. interp_poly_v2()
 %%---------------------------------------------------------------
-function [pkEst, pkEst_fp] = peakEstFixedPt_v2(y,M,Ts,f,mode)       
+function [pkEst, pkEst_fp] = peakEstFixedPt_v2(y,M,Ts,f,~)       
 
 J = sqrt(-1);
  
-z = exp(-J*2*pi*f*[0:M-1]*Ts);         % Compute Fourier coefficient at desired freq
+z = exp(-J*2*pi*f*(0:M-1)*Ts);         % Compute Fourier coefficient at desired freq
 % Fixed point version of the complex tone generator
 omode = 'complex';
 Nt = 16;
@@ -37,9 +37,9 @@ Nt = 24;
 Ni = 0;
 [Y_fp,newNi] = dotProduct_fp(y,z_fp, Nt, Ni);
 
-phEst = ((pi/2)+angle(Y));           % Estimate the phase in radians
+% phEst = ((pi/2)+angle(Y));           % Estimate the phase in radians
 % Quantize phEst angle
-phEst = (pi/2)+angle(Y_fp);
+% phEst = (pi/2)+angle(Y_fp);
 numIter = 20;
 Nt = 24;
 phEst_fp = mod((pi/2)+cordic_angleFixPt(real(Y_fp), imag(Y_fp), numIter, Nt, newNi),2*pi);
@@ -68,24 +68,24 @@ Ni = 0;
 ONE_BY_F = quantize1(1/f,Nt,Ni,'unsigned','trunc');
 del1_fp = ONE_BY_F*(pi-2*phEst)*ONE_BY_4PI;
  
-if (del1 < 0)
-    del1 = del1 + (1/f);   % take from next cycle
-end
+% if (del1 < 0)
+%     del1 = del1 + (1/f);   % take from next cycle
+% end
 % Quantize del1
 if (del1_fp < 0)
     del1_fp = quantize1(del1_fp + ONE_BY_F, Nt,Ni,'unsigned','trunc');   % take from next cycle
 end
 
 del1 = del1_fp;
-tVec = [0:M-1]*Ts;
+% tVec = [0:M-1]*Ts;
  
 %pkEst = interp1(tVec, y, [del1:1/f:(M-1)*Ts], 'spline', 'extrap');  % Matlab interpolation
 %pkEst = interp_poly_v2(tVec/Ts, y, [del1:1/f:(M-1)*Ts]/Ts);
 Nt = 32;
 Ni = 28;
 ONE_BY_TS = quantize1(1/Ts,Nt,Ni,'unsigned','trunc');
-pkEst = interp_poly_v2([0:M-1], y, [del1*ONE_BY_TS:ONE_BY_TS*ONE_BY_F:(M-1)]);
-pkEst_fp = interp_poly_v3_fp([0:M-1], y, [del1*ONE_BY_TS:ONE_BY_TS*ONE_BY_F:(M-1)]);
+pkEst = interp_poly_v2((0:M-1), y, (del1*ONE_BY_TS:ONE_BY_TS*ONE_BY_F:(M-1)));
+pkEst_fp = interp_poly_v3_fp((0:M-1), y, (del1*ONE_BY_TS:ONE_BY_TS*ONE_BY_F:(M-1)));
  
 end
 
