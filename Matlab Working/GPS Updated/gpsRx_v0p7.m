@@ -9,7 +9,7 @@
 %% Version History: (in reverse chronological order please)
 %%
 %% ver  0.7   13-Apr-2020   Ganesan, T             Added the false alarm and Pdet computation (Pfa Vs threshold, Pdet)
-%%                                                 Modified the Analog, digital beamformer splitting of optimal weights
+%%                                                    Modified the Analog, digital beamformer splitting of optimal weights
 %% ver  0.6   10-Apr-2020   Ganesan, T             Fixed the two level detection and threshold based on the ratio of large two peaks
 %% ver  0.5   25-Feb-2020   Ganesan, T             Fixed the initial Wt selection and fixed the fine freq offset loop
 %%                                                 Added the quantized analog weight computation 
