@@ -53,7 +53,7 @@ ABF_QNT = 0;         % Enable quantization of ABF weights
 ABF_NT = 6;
 ABF_NI = 2;          % Angle needs 2 integer bits (for -pi to pi)
 DET_THRESH_BETA = 1.4;  % DEFAULT: Detection threshold for Pfa = 1e-3, Pfa = (N^2-N) * Beta(N-1,1+beta)
-PFA_SIM = 0;
+PFA_SIM = 1;
 if (PFA_SIM > 0)
     %PFA_SIM_BETA_ARRAY = [1.2 1.4 1.6 2.0 2.4 2.8];  % Detection thresholds used for Pfa simulation
     PFA_SIM_BETA_ARRAY = [1.4 1.6 1.8];  % Detection thresholds used for Pfa simulation
@@ -240,7 +240,7 @@ for pfaIndex = 1:length(PFA_SIM_BETA_ARRAY)
             else
                 coarseDetFlag(wtIndex,ii) = 0;
             end
-            if (PFA_SIM)
+            if (PFA_SIM>0)
                 falseAlarmExpt = falseAlarmExpt + 1;
             else
                 PdetExpt = PdetExpt + 1;
@@ -304,8 +304,8 @@ for pfaIndex = 1:length(PFA_SIM_BETA_ARRAY)
 end  % for PfaIndex
 
 % Save intermediate results for debug
-fname = sprintf('GPS_rx_results_interim_%s.mat',date);
-save(fname);
+% fname = sprintf('GPS_rx_results_interim_%s.mat',date);
+% save(fname);
 
 % Compute the false alarm probability
 if (PFA_SIM > 0)

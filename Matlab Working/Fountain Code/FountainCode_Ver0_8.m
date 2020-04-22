@@ -474,13 +474,14 @@ code_matrixGF = transpose(reshape(ConversionM,63,441));
 input = [0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
 en = code_matrixGF*input; % encoded bits
 encoded_bits = mod(en,2); % converting encoded bits in GF(2)
+
 ModBpsk = (2*encoded_bits-1); % BPSK Modulation
 
 SNR=1:1:10;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
 i=0;
-numExpts = 20000;
+numExpts = 10000;
 
 %Introducing Channel Error
 for BlockSize= 180:40:300
