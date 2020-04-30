@@ -1,8 +1,8 @@
-EbNodB = 4;
+EbNodB = 9;
 R = 4/7; %(7,4) Hamming (4/7 bits/symbol) 
 EbNo = 10^(EbNodB/10);
 sigma = sqrt(1/(2*R*EbNo));
-
+BER_th = 0.5*erfc(sqrt(EbNo));
 k = 4; %number of message bits
 n = 7; %number of codeword bits
 
@@ -23,7 +23,7 @@ cwords	=  [0	0	0	0	0	0	0;
 			1	1	1	0	1	0	0;
      		1	1	1	1	1	1	1];
 
-Nbiterrs = 0; Nblkerrs = 0; Nblocks = 10000; 
+Nbiterrs = 0; Nblkerrs = 0; Nblocks = 1000000; 
 for i = 1: Nblocks
 	msg = randi([0 1],1,k); %generate random k-bit message
 	%Encoding 
@@ -55,5 +55,5 @@ end
 BER_sim = Nbiterrs/k/Nblocks;
 FER_sim = Nblkerrs/Nblocks;
 
-disp([EbNodB FER_sim BER_sim Nblkerrs Nbiterrs Nblocks])	
 
+disp([EbNodB FER_sim BER_sim BER_th Nblkerrs Nbiterrs Nblocks])	
