@@ -1,10 +1,10 @@
 EbNodB = 2;
 MaxItrs = 8;
 
-load base_matrices/NR_1_0_256.txt
+load NR_1_0_256.txt
 B = NR_1_0_256;
-[mb,nb] = size(B);
-z  = 256;
+[mb,nb] = size(B); %mb=46 nb=68
+z = 256;
 
 Slen = sum(B(:)~=-1); %number of non -1 in B
 treg = zeros(max(sum(B ~= -1,2)),z); %register storage for minsum
@@ -16,7 +16,7 @@ Rate = k/n;
 EbNo = 10^(EbNodB/10);
 sigma = sqrt(1/(2*Rate*EbNo));
 
-Nbiterrs = 0; Nblkerrs = 0; Nblocks = 100; 
+Nbiterrs = 0; Nblkerrs = 0; Nblocks = 1000; 
 for i = 1: Nblocks
 	%msg = randi([0 1],1,k); %generate random k-bit message
     msg = zeros(1,k); %all-zero message
