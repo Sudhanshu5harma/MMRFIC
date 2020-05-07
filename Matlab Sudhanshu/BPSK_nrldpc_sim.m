@@ -1,5 +1,5 @@
-EbNodB = 2;
-MaxItrs = 8;
+EbNodB = 3;
+MaxItrs = 4;
 
 load NR_1_0_256.txt
 B = NR_1_0_256;
@@ -18,6 +18,7 @@ sigma = sqrt(1/(2*Rate*EbNo));
 
 Nbiterrs = 0; Nblkerrs = 0; Nblocks = 1000; 
 for i = 1: Nblocks
+    disp(['Block number :',num2str(i)])
 	%msg = randi([0 1],1,k); %generate random k-bit message
     msg = zeros(1,k); %all-zero message
 	%Encoding 
@@ -64,6 +65,7 @@ for i = 1: Nblocks
                     L((col-1)*z+1:col*z) = L((col-1)*z+1:col*z)+R(Ri,:);
             end
         end
+        disp(['.................iteration :',num2str(itr), ])
         msg_cap = L(1:k) < 0; %decision
         itr = itr + 1;
     end
