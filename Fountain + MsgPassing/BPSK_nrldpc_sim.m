@@ -16,7 +16,7 @@ Rate = k/n;
 EbNo = 10^(EbNodB/10);
 sigma = sqrt(1/(2*Rate*EbNo));
 
-Nbiterrs = 0; Nblkerrs = 0; Nblocks = 1000; 
+Nbiterrs = 0; Nblkerrs = 0; Nblocks = 1002; 
 for i = 1: Nblocks
     disp(['Block number :',num2str(i)])
 	%msg = randi([0 1],1,k); %generate random k-bit message
