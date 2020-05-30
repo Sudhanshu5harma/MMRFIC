@@ -473,11 +473,10 @@ code_matrixGF = transpose(reshape(ConversionM,63,441));
 
 %input = round(rand(1,63));
 input = [0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
+
 en = code_matrixGF*input; % encoded bits
 encoded_bits = mod(en,2); % converting encoded bits in GF(2)
-
 ModBpsk = (2*encoded_bits-1); % BPSK Modulation
-
 SNR=1:1:4;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
@@ -506,8 +505,8 @@ for BlockSize= 180:40:300
             ChannelRandombits=Demoded(RandomRows,:); % select random bits and give it to gaussian Elimi to make matrix
             Channel_msg_randombits = ChannelOutput(RandomRows,:);
             GaussianDecoderOutput=GaussianB(CodeMatrixRandom,ChannelRandombits); % calling function Gaussian Elimination-Binary
-            Gaussian_biased = 10* abs(Channel_msg_randombits).*(2*(1*(GaussianDecoderOutput'~=0))-1);
-            MessagePassingOutput = Msgpassing_v_1(CodeMatrixRandom,Gaussian_biased);
+            Sub_codeMatrixOut = mod((CodeMatrixRandom*GaussianDecoderOutput),2);
+            MessagePassingOutput = Msgpassing_v_1(CodeMatrixRandom,Channel_msg_randombits);
             Message_error = (1*(MessagePassingOutput>0));
             BitDifference_enc = sum(bitxor(encoded_bits,Demoded));
             BitDifference_dec = sum(abs(input - GaussianDecoderOutput));
