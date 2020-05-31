@@ -481,7 +481,7 @@ SNR=1:1:4;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
 i=0;
-numExpts = 1000;
+numExpts = 1;
 
 %Introducing Channel Error
 for BlockSize= 180:40:300
@@ -505,8 +505,12 @@ for BlockSize= 180:40:300
             ChannelRandombits=Demoded(RandomRows,:); % select random bits and give it to gaussian Elimi to make matrix
             Channel_msg_randombits = ChannelOutput(RandomRows,:);
             GaussianDecoderOutput=GaussianB(CodeMatrixRandom,ChannelRandombits); % calling function Gaussian Elimination-Binary
+            
+            
             Sub_codeMatrixOut = mod((CodeMatrixRandom*GaussianDecoderOutput),2);
             MessagePassingOutput = Msgpassing_v_1(Sub_codeMatrixOut,Channel_msg_randombits);
+            
+            
             Message_error = (1*(MessagePassingOutput>0));
             BitDifference_enc = sum(bitxor(encoded_bits,Demoded));
             BitDifference_dec = sum(abs(input - GaussianDecoderOutput));
