@@ -481,7 +481,7 @@ SNR=1:1:10;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
 i=0;
-numExpts = 1;
+numExpts = 10000;
 
 %Introducing Channel Error
 for BlockSize= 180:40:300
