@@ -31,7 +31,7 @@ for i = 1: Nblocks
     cword = zeros(1,n); %all-zero codeword
     BPSK_mod = 1 - 2 * cword; %BPSK bit to symbol conversion
     %Channel_Output = BPSK_mod + sigma * randn(1,n); %AWGN channel I
-    Channel_Output = [0.2 -0.3 1.2 -0.5 0.8 0.6 -1.1];
+    Channel_Output = [0.5 -0.3 1.2 -0.5 0.8 0.6 -1.1];
     update_belief = Channel_Output;
     itr =0;
     Update_StorageMatrix = StorageMatrix;
@@ -46,13 +46,22 @@ for i = 1: Nblocks
         for col_val = 1:col
             t = (abs(Update_StorageMatrix(col_val,:)));
             min1 = min(t(t>0));
-            pos = find(t==min1);
-            %if pos==1
-            %   r = abs(Update_StorageMatrix(col_val,pos+1:end));
-            %else
-            r = abs(Update_StorageMatrix(col_val,[1:pos-1 pos+1:end]));
-            %end
-            min2 = min(r(r>0));
+            if (isempty(min1))
+                min1 = 0;
+                min2 = min1;
+            else
+                pos = find(t==min1);
+                if pos==1
+                    r = abs(Update_StorageMatrix(col_val,pos+1:end));
+                else
+                    r = abs(Update_StorageMatrix(col_val,[1:pos-1 pos+1:end]));
+                end
+                if isempty(find(abs(r)>0, 1))
+                    min2 = min1;
+                else
+                    min2 = min(r(r>0));
+                end
+            end
             S= sign(Update_StorageMatrix(col_val,:));
             overall_parity = prod(S(S~=0));
             Update_StorageMatrix(col_val,:)=min1;

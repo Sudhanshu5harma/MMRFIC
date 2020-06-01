@@ -471,17 +471,18 @@ tic
 ConversionM = dec2bits(code_matrix',3);
 code_matrixGF = transpose(reshape(ConversionM,63,441));
 
-%input = round(rand(1,63));
-input = zeros(63,1);%[0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
+%input = round(rand(63,1));
+input = [0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
 
 en = code_matrixGF*input; % encoded bits
 encoded_bits = mod(en,2); % converting encoded bits in GF(2)
-ModBpsk = (2*encoded_bits-1); % BPSK Modulation
+ModBpsk = 1-2*encoded_bits; % BPSK Modulation
 SNR=1:1:10;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
+PlotMatrix1=zeros(4,11);
 i=0;
-numExpts = 100;
+numExpts = 1000;
 
 %Introducing Channel Error
 for BlockSize= 180:40:300
@@ -489,6 +490,7 @@ for BlockSize= 180:40:300
     j=1;
     i=i+1;
     PlotMatrix(i,1)=BlockSize;
+    PlotMatrix1(i,1)=BlockSize;
     for ErrorPro = 1 : length(SNR)
         disp(['   * Running sim for SNR: ',num2str(SNR(ErrorPro))]);
         BitDifferenceSum=0;
@@ -498,7 +500,7 @@ for BlockSize= 180:40:300
         %disp(num2str(sigma))
         for numberoftimes=1:numExpts
             ChannelOutput = (ModBpsk' + sigma * randn(1,length(ModBpsk)))';
-            Demoded= (1*(ChannelOutput > 0));
+            Demoded= (1*(ChannelOutput < 0));
             [ranked_output,index] = sort(abs(ChannelOutput),'descend');
             RandomRows = index(1:BlockSize);
             CodeMatrixRandom=code_matrixGF(RandomRows,:);%select random row from code Matrix and give it to the Gaussian B function
@@ -508,11 +510,11 @@ for BlockSize= 180:40:300
             
             
             %Sub_codeMatrixOut = mod((CodeMatrixRandom*GaussianDecoderOutput),2);
-            Mes_input = 10*(2*GaussianDecoderOutput-1);
+            Mes_input = 10*(1-2*GaussianDecoderOutput);
             MessagePassingOutput = Msgpassing_v_1(CodeMatrixRandom,Mes_input);
             
             
-            Message_error = (1*(MessagePassingOutput>0));
+            Message_error = (1*(MessagePassingOutput<0));
             BitDifference_enc = sum(bitxor(encoded_bits,Demoded));
             BitDifference_dec = sum(abs(input - GaussianDecoderOutput));
             BitDifference_msg = sum(abs(input - Message_error'));
@@ -523,11 +525,19 @@ for BlockSize= 180:40:300
         AvgBitError_Msg = BitDifferenceSum_Msg/(numExpts*63);
         j=j+1;
         PlotMatrix(i,j) = AvgBitError_Msg;
+        PlotMatrix1(i,j) = AvgBitError;
     end
 end
+
 toc
-loglog(SNR,PlotMatrix(:,2:end),'o-'); grid;
-axis([1 10 1e-6 1]);
-legend(num2str(PlotMatrix(:,1)));
+loglog(SNR,PlotMatrix(:,2:end),'*-');grid on;
+hold on;
+loglog(SNR,PlotMatrix1(:,2:end),'o-'); 
+hold off;
+
 xlabel('SNR');
 ylabel('Bit Error Rate (BER)');
+leg=legend(num2str(PlotMatrix(:,1)),'Location','southeast');
+leg.Title.String = 'After Msg Passing';
+axis([1 10 1e-6 1]);
+ 

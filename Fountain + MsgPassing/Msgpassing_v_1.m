@@ -1,6 +1,6 @@
 function out = Msgpassing_v_1(sortedmat,gaussian_out)
 
-MaxItrs = 10;
+MaxItrs = 2;
 [col,row]=size(sortedmat);
 Update_StorageMatrix = double(sortedmat);
 update_belief = gaussian_out';
@@ -26,7 +26,7 @@ while itr < MaxItrs
             else
                 r = abs(Update_StorageMatrix(col_val,[1:pos-1 pos+1:end]));
             end
-            if length(pos)<2
+            if isempty(find(abs(r)>0, 1))
                 min2 = min1;
             else
                 min2 = min(r(r>0));
@@ -48,5 +48,5 @@ while itr < MaxItrs
     end
     itr = itr+1;
 end
-out = update_belief;
+out = (update_belief);
 end
