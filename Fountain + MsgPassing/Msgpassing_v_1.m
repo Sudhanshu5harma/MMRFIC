@@ -1,29 +1,37 @@
 function out = Msgpassing_v_1(sortedmat,gaussian_out)
 
-MaxItrs = 8;
+MaxItrs = 10;
 [col,row]=size(sortedmat);
-StorageMatrix = sortedmat;
-Update_StorageMatrix =zeros(col,row);
-gaussian_out = gaussian_out';
-belief = gaussian_out;
+Update_StorageMatrix = double(sortedmat);
+update_belief = gaussian_out';
 itr =0;
 while itr < MaxItrs
     %%Decoding
+    belief = update_belief;
     for i = 1: row
-        Update_StorageMatrix(:,i) = gaussian_out(i)*StorageMatrix(:,i);
+        Update_StorageMatrix(:,i) = update_belief(i)*(abs(Update_StorageMatrix(:,i))>0);
     end
     %row operations
     % for now I am only using 1 iteration this can be increase
     for col_val = 1:col
         t = (abs(Update_StorageMatrix(col_val,:)));
         min1 = min(t(t>0));
-        pos = find(t==min1);
-        if pos==1
-            r = abs(Update_StorageMatrix(col_val,pos+1:end));
+        if (isempty(min1))
+            min1 = 0;
+            min2 = min1;
         else
-            r = abs(Update_StorageMatrix(col_val,[1:pos-1 pos+1:end]));
+            pos = find(t==min1);
+            if pos==1
+                r = abs(Update_StorageMatrix(col_val,pos+1:end));
+            else
+                r = abs(Update_StorageMatrix(col_val,[1:pos-1 pos+1:end]));
+            end
+            if length(pos)<2
+                min2 = min1;
+            else
+                min2 = min(r(r>0));
+            end
         end
-        min2 = min(r(r>0));
         S= sign(Update_StorageMatrix(col_val,:));
         overall_parity = prod(S(S~=0));
         Update_StorageMatrix(col_val,:)=min1;

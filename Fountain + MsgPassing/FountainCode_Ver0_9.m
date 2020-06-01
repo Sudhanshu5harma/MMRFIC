@@ -472,16 +472,16 @@ ConversionM = dec2bits(code_matrix',3);
 code_matrixGF = transpose(reshape(ConversionM,63,441));
 
 %input = round(rand(1,63));
-input = [0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
+input = zeros(63,1);%[0;0;1;1;0;1;1;0;0;1;1;1;1;1;1;0;0;1;0;1;0;1;0;1;1;0;0;1;1;0;1;0;0;1;0;1;0;0;1;0;1;0;1;1;0;0;1;1;1;0;1;1;1;1;1;1;0;1;0;0;0;1;0];
 
 en = code_matrixGF*input; % encoded bits
 encoded_bits = mod(en,2); % converting encoded bits in GF(2)
 ModBpsk = (2*encoded_bits-1); % BPSK Modulation
-SNR=1:1:4;
+SNR=1:1:10;
 % PlotMatrix=[];
 PlotMatrix=zeros(4,11);
 i=0;
-numExpts = 1;
+numExpts = 100;
 
 %Introducing Channel Error
 for BlockSize= 180:40:300
@@ -507,8 +507,9 @@ for BlockSize= 180:40:300
             GaussianDecoderOutput=GaussianB(CodeMatrixRandom,ChannelRandombits); % calling function Gaussian Elimination-Binary
             
             
-            Sub_codeMatrixOut = mod((CodeMatrixRandom*GaussianDecoderOutput),2);
-            MessagePassingOutput = Msgpassing_v_1(Sub_codeMatrixOut,Channel_msg_randombits);
+            %Sub_codeMatrixOut = mod((CodeMatrixRandom*GaussianDecoderOutput),2);
+            Mes_input = 10*(2*GaussianDecoderOutput-1);
+            MessagePassingOutput = Msgpassing_v_1(CodeMatrixRandom,Mes_input);
             
             
             Message_error = (1*(MessagePassingOutput>0));
