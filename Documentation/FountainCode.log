@@ -1,0 +1,454 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.6.2)  2 JUN 2020 16:33
+entering extended mode
+**./FountainCode.tex
+(FountainCode.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-05-15>
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ar
+ticle.cls"
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\si
+ze12.clo"
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\in
+putenc.sty"
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel
+\babel.sty"
+Package: babel 2020/05/13 3.44 The Babel package
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel
+\babel.def"
+File: babel.def 2020/05/13 3.44 Babel common definitions
+\babel@savecnt=\count175
+\U@D=\dimen135
+\l@babelnohyphens=\language78
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel
+\txtbabel.def")
+\bbl@readstream=\read2
+)
+\bbl@dirlevel=\count176
+
+*************************************
+* Local config file bblopts.cfg used
+*
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/arabi\b
+blopts.cfg"
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/babel-e
+nglish\english.ldf"
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for ukenglish
+(babel)             (\language72) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for ukenglish
+(babel)             (\language72) on input line 108.
+))
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath
+\amsmath.sty"
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath
+\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath
+\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen136
+))
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath
+\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen137
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath
+\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count177
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count178
+\leftroot@=\count179
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count180
+\DOTSCASE@=\count181
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen138
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count182
+\c@MaxMatrixCols=\count183
+\dotsspace@=\muskip16
+\c@parentequation=\count184
+\dspbrk@lvl=\count185
+\tag@help=\toks18
+\row@=\count186
+\column@=\count187
+\maxfields@=\count188
+\andhelp@=\toks19
+\eqnshift@=\dimen139
+\alignsep@=\dimen140
+\tagshift@=\dimen141
+\tagwidth@=\dimen142
+\totwidth@=\dimen143
+\lineht@=\dimen144
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfont
+s\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfont
+s\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s\graphicx.sty"
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s\graphics.sty"
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen145
+\Gin@req@width=\dimen146
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometr
+y\geometry.sty"
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex
+\ifvtex.sty"
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex
+\iftex.sty"
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+\Gm@cnth=\count189
+\Gm@cntv=\count190
+\c@Gm@tempcnt=\count191
+\Gm@bindingoffset=\dimen147
+\Gm@wd@mp=\dimen148
+\Gm@odd@mp=\dimen149
+\Gm@even@mp=\dimen150
+\Gm@layoutwidth=\dimen151
+\Gm@layoutheight=\dimen152
+\Gm@layouthoffset=\dimen153
+\Gm@layoutvoffset=\dimen154
+\Gm@dimlist=\toks23
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometr
+y\geometry.cfg"))
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyhd
+r\fancyhdr.sty"
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip52
+\f@nch@O@elh=\skip53
+\f@nch@O@erh=\skip54
+\f@nch@O@olh=\skip55
+\f@nch@O@orh=\skip56
+\f@nch@O@elf=\skip57
+\f@nch@O@erf=\skip58
+\f@nch@O@olf=\skip59
+\f@nch@O@orf=\skip60
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lastpag
+e\lastpage.sty"
+Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/draftwa
+termark\draftwatermark.sty"
+Package: draftwatermark 2020/05/11 2.1 Put a gray textual watermark on document
+ pages
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/kvoptio
+ns\kvoptions.sty"
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcm
+ds\ltxcmds.sty"
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvset
+keys\kvsetkeys.sty"
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/everypa
+ge\everypage.sty"
+Package: everypage 2007/06/20 1.1 Hooks to run on every page
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s\color.sty"
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphic
+s-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+))
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\l
+ongtable.sty"
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip61
+\LTright=\skip62
+\LTpre=\skip63
+\LTpost=\skip64
+\LTchunksize=\count192
+\LTcapwidth=\dimen155
+\LT@head=\box47
+\LT@firsthead=\box48
+\LT@foot=\box49
+\LT@lastfoot=\box50
+\LT@cols=\count193
+\LT@rows=\count194
+\c@LT@tables=\count195
+\c@LT@chunks=\count196
+\LT@p@ftn=\toks24
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backe
+nd\l3backend-pdfmode.def"
+File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count197
+\l__pdf_internal_box=\box51
+) (FountainCode.aux)
+\openout1 = `FountainCode.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/
+mkii\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count198
+\scratchdimen=\dimen156
+\scratchbox=\box52
+\nofMPsegments=\count199
+\nofMParguments=\count266
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count267
+\MPscratchDim=\dimen157
+\MPnumerator=\count268
+\makeMPintoPDFobject=\count269
+\everyMPtoPDFconversion=\toks26
+)
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopd
+f-pkg\epstopdf-base.sty"
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=674.33032pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-23.91173pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
+
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfont
+s\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
+
+
+("C:\Users\Sudhanshu Sharma\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfont
+s\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <284.52756> not available
+(Font)              size <24.88> substituted on input line 87.
+
+[1{C:/Users/Sudhanshu Sharma/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+] (FountainCode.toc)
+\tf@toc=\write3
+\openout3 = `FountainCode.toc'.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+Make it at least 14.49998pt.
+We now make it that large for the rest of the document.
+This may cause the page layout to be inconsistent, however.
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 121--123
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--149
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--173
+
+ []
+
+[4] [5]
+<BSC.JPG, id=28, 398.08725pt x 319.79475pt>
+File: BSC.JPG Graphic file (type jpg)
+<use BSC.JPG>
+Package pdftex.def Info: BSC.JPG  used on input line 195.
+(pdftex.def)             Requested size: 159.23207pt x 127.91562pt.
+
+
+pdfTeX warning: miktex-pdftex.exe (file ./Fountainplot.pdf): PDF inclusion: fou
+nd PDF version <1.7>, but at most version <1.5> allowed
+<Fountainplot.pdf, id=29, 614.295pt x 794.97pt>
+File: Fountainplot.pdf Graphic file (type pdf)
+<use Fountainplot.pdf>
+Package pdftex.def Info: Fountainplot.pdf  used on input line 207.
+(pdftex.def)             Requested size: 245.71364pt x 317.98236pt.
+
+AED: lastpage setting LastPage
+[6 <./BSC.JPG>] [7 <./Fountainplot.pdf>] (FountainCode.aux)
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 259.64755pt have occurred.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4282 strings out of 480799
+ 62529 string characters out of 2890646
+ 324298 words of memory out of 3000000
+ 20215 multiletter control sequences out of 15000+200000
+ 541430 words of font info for 59 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 30i,11n,45p,426b,285s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Sudhanshu Sharma\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen
+/ec/dpi600\tcrm1200.pk><C:/Users/Sudhanshu Sharma/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Sudhanshu Sharma/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/User
+s/Sudhanshu Sharma/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb><C:/Users/Sudhanshu Sharma/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Sudhanshu Sharma/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Sudhans
+hu Sharma/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
+2.pfb><C:/Users/Sudhanshu Sharma/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr17.pfb><C:/Users/Sudhanshu Sharma/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Sudhanshu Sharma/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Us
+ers/Sudhanshu Sharma/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb>
+Output written on FountainCode.pdf (7 pages, 252450 bytes).
+PDF statistics:
+ 76 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+

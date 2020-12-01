@@ -1,0 +1,312 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MMRFIC Document template header v0.1
+%%
+%% (C) MMRFIC Technology Pvt. L:td., Bangalore.
+%%
+%%  NOTE:
+%%  This header needs to be kep as it is for all LaTeX documents.
+%%  If you have any comments, please send them to gana@mmrfic.com 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Header starts from here  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+\documentclass[12pt,a4paper,onecolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+\author{MMRFIC Technology Pvt. Ltd., Bangalore}
+\title{NT1065}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage}
+
+%% Header and footer style
+\lhead{}
+%\chead{}
+%\rhead{}
+%\lfoot{}
+%\cfoot{}
+%\rfoot{}
+
+\fancyhead{}  % Cleal default format
+\rhead{MMRFIC Confidential: NDA Required}
+\fancyfoot{}  % Cleal default format
+%\fancyfoot[LE,RO]{\thepage}           
+%\fancyfoot[RO]{Page \thepage\ of\  \pageref{\LastPage}}           % page number
+\fancyfoot[RO]{Page \thepage}           
+% page number in "outer"positionfooterline
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.6pt}
+\setcounter{figure}{0}
+\makeatletter
+\renewcommand{\thefigure}{\@arabic\c@figure}
+\makeatother 
+
+%% Watermark
+%\usepackage[firstpage]{draftwatermark}
+\usepackage{draftwatermark}
+\SetWatermarkFontSize{10cm}
+\SetWatermarkColor[rgb]{100}
+%\SetWatermarkText{VER 0.1}
+\SetWatermarkText{VER 1}
+\SetWatermarkLightness{0.6}
+
+%% Other misc used in the project
+\usepackage{longtable}
+%% Header ends from here  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%% 
+%% NOTE2:
+%% After copying the header lines, do not change the order of the lines.
+%% Make changes only to title of the document, Watermark text (including the 
+%% version number of the document, and rhead{} content. Allowed rhead{} lines 
+%% are  (i) \rhead{MMRFIC Confidential: NDA Required}, (ii) \rhead{MMRFIC 
+%% Tutorial}, (iii) \rheaf{}
+
+
+\begin{document}
+%\title{User Guide for RF Driver Board V0.2}
+\maketitle
+\vfill
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Ver. & Author(s) & Date & Comments \\
+\hline \hline
+1.0 & Sudhanshu Sharma & 29/05/2020 & Created \\%%% Enter version history here
+\hline
+\end{tabular}
+\caption{Version History}
+\end{center}
+\end{table}
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+This document contains the documnentation regarding NT1065. It explains the features of NT1065 along with the content of the files like NT1065.c, NT1065.h, NT1065cofig.h. 
+\section{NT1065}
+NT1065 is a four-channel RF Front-End IC for the reception of Global Navigation Satellite System (GNSS) signals (GPS, GLONASS, Galileo, BeiDou, NavIC, QZSS) and also signals of satellite-based augmentation systems like OmniSTAR at all frequency bands in various combinations: L1, L2, L3, L5, E1, E5a, E5b, E6, B1, B2, B3. Galileo E5 band as well as BeiDou B1, B2, B3 (phase 3) band can be obtained as entire signal with two channels fed by the same LO and then restored in digital domain to true complex data. As a benefit one can discover wide possibilities of improving the positioning accuracy down to centimeter range without taking RTK technique. Each setting, including output signal frequency bandwidth, AGC options, mirror channel suppression option, etc., can be set for every channel individually. NT1065 includes two fully independent frequency synthesizers. Channel 1 and channel 2 are supplied with LO signal generated in PLL “A” while PLL “B” is assigned for channels 3 and 4. For specific applications there is an option to feed all four channels with single LO source from PLL “A”. This powerful toolkit is accompanied with very simple and easy-to-use register map. All the functionality allows application of NT1065 in high precision GNSS based positioning, goniometric, driverless car systems and related branches
+\section{Features of NT1065}
+\begin{itemize}
+  \item Single conversion super heterodyne receiver
+  \item Four independent configurable channels, each includes preamplifier, image rejection mixer, IF filter, IFA, 2-bit ADC
+  \item Signal bandwidth up to 31MHz supports GNSS high precision codes such as P-code in GPS or wideband E5 Galileo
+  \item  Dual adoptable AGC system (RF + IF) or programmable gain
+  \item  High dynamic range with 1dB compression point more than -30dBm
+  \item Analog differential output with two options of voltage swing 0.2/0.47Vp-p and 0.4/0.98Vp-p (sine wave/noise) or 2-bit ADC digital output data
+  \item Two independent fully integrated synthesizers with flexible LO and CLK frequencies selection (“A” and “B”)
+  \item Embedded temperature sensor
+  \item SPI interface with easy-to-use register map
+  \item Individual status indicators of main subsystems (available in SPI registers) and cumulative status indicator (AOK, available both as a separate pin and in SPI registers)
+  \item 10x10mm QFN88 package
+\end{itemize}
+
+\section{Applications}
+\begin{itemize}
+  \item GNSS based positioning systems 
+  \item GNSS based goniometric systems 
+  \item In-vehicle navigation systems 
+  \item GNSS based driverless car systems 
+  \item  Professional drones
+\end{itemize}
+
+\section{NT1065.h}
+This sections describe how the .h file is written. It has all the structure defined for all 48 registers and their enum. 
+\begin{center}
+\begin{verbatim}
+struct {
+    unsigned short R0_VAL;
+   
+}NT_REG_STRUCT;
+
+typedef enum {
+    R0_ADDR = 0,
+   
+}NT_ADDR_STRUCT;
+
+struct {
+    unsigned short defaultval;
+    unsigned short val;
+}r0;
+\end{verbatim}
+\end{center}
+\section{NT1065.c}
+This sections describe how the .c file is written. It has all the register value defined and also the corresponding initData. 
+\begin{center}
+\begin{verbatim}
+    r0.defaultval=33;
+    r0.val = r0.defaultval;
+     NT_REG_STRUCT.R0_VAL = r0.val;
+\end{verbatim}
+\end{center}
+\section{NTCONFIG.c}
+This sections describe how the .c file is written. It has all the configuration done to use NT1065 for project. 
+\begin{verbatim}
+
+ // SETTING TO BE PERFORMED FOR FREQUENCY = 16.368MHz. PLL A setting for NT1065
+
+	initData.valueofREG67 = 0xCD;
+	initData.valueofREG68 = 0x8A;
+	PPLSel = 1;                       //REG2[1-0] 0->standby, 
+					        //1->PLL A, 2->PLL B,3->Active
+        initData.PPLSel = PPLSel;   //REG12
+	targetFreqMHz = 16368000; 
+  
+        // CALCULATING VALUE OF R AND N 	
+
+	R = 1;                   // to assign the value of R(1,15)
+	N = 97;                // Value given by gana
+    	//N = targetFreqMHz * R/TCXOfreq;   // value of N(48,511)
+	
+        // PLL A write REG41 and for PLL B  REG45
+	PllBand = 1 ;                 //REG41(1) 0->L2/L3/L5, 1->L1 
+	initData.PllBand = PllBand; 
+
+
+	// SPLITTING THE VALUE OF N 
+
+	N2 = N&256; // '100000000' is 256
+	N2 = N2>>8;
+	N1 = N&255; // '11111111' is 255
+	
+
+	initData.N1 = N1;         // REG42(7-0) for PLL A and REG46(7-0) for PLL B
+	initData.N2 = N2;         // REG43(7) for PLL A and REG47(7])for PLL B
+	initData.R = R;            // REG43(6-3) for PLL A and REG47(6-3) for PLL B
+
+     // DELAY of 1ms to be given to lock PLL
+
+
+        // 7.3 SINGLE LO SOURCE CONFIGURATION
+	
+	signalLOConfigA = 0;      // REG3[0] feed all mixers from PLL "A" 
+	initData.signalLOConfigA =signalLOConfigA;
+	signalLOConfigB = 0; // REG45[0] turning off PLL"B"
+	initData.signalLOConfigB = signalLOConfigB;
+
+
+         //7.4 RF AGC CONFIGURATION 
+
+	rfAgc = rcG12p00 ;       // REG17(7-4) see enum for REG17 to assign value 
+	initData.rfAgc =rfAgc;	
+	LPFCali = passband15p69;   //REG14(6-0) for channel "A" then REG21,REG28,REG35
+	initData.LPFCali = LPFCali;
+
+
+        //7.7 "0" analog differential  "1" 2-bit ADC output R15 
+ 
+	ADCoutput = 1; 
+
+	// REG15(0)
+	X  = 1 ;           //User has to give value
+	if (ADCoutput==1)
+		
+		switch (X)
+		case 1: Adctype = 0; //REG19
+		break;
+		case 2: Adctype = 1;
+		break;
+		case 3: Adctype = 2;
+		break;
+		case 4: Adctype = 3;
+		break;
+	
+
+
+	// 7.8 Clock freq calculation 
+
+	C = 8;        //Given by gana sir can be from value 8 - 31 with step 1
+	freqclk = targetFreqMHz/2*C; 
+	PPLSel = 0; // REG12      // select PPL "A" - 0, PLL "B" - 1
+	initData.C=C; //REG11
+	initData.PPLSel = PPLSel; //REG12
+	initData.Adctype=Adctype; //REG19
+	initData.ADCoutput=ADCoutput; // REG15
+
+
+	// 7.10 
+
+	TempMode = 1; // 1 for continous and 0 for single 
+	initData.TempMode = TempMode; // REG5 D 0 
+
+\end{verbatim}
+
+\section{Application notes }
+\subsection{REFERENCE FREQUENCY (TCXO) CONFIGURATION AND START UP PROCEDURE}
+
+After power up NT1065 assumes feeding with 10MHz TCXO signal and wakes up in the active mode. PLLs are supposed to be locked after 1 ms and generally chip is ready for operation. During next 15 ms LPF calibration procedure is running in background mode and has no influence on channel filters. After completion a cut-off frequency correction code is applied to all channels automatically and NT1065 has following configuration: 
+\begin{itemize}
+
+\item PLL A is set to L1 band and feeds channel1 and channel2 with LO = 1590 MHz  
+\item PLL B is set to L2/L3/L5 band and feeds channel3 and channel4 with LO = 1235 MHz  
+\item  Channel1 down converts low side band (i.e. L1 GPS/Galileo/BeiDou/QZSS) 
+\item  Channel2 down converts high side band (i.e. L1 GLONASS) 
+\item  Channel3 down converts high side band (i.e. L2 GLONASS) 
+\item  Channel4 down converts low side band (i.e. L2 GPS/QZSS) 
+\item  All channels are set to analog differential output data interface, RF GC system in manual mode at max gain, IF GC system in auto mode  PLL A and PLL B tuning systems were executed 
+\item  LPF auto calibration system was executed 
+\item  53 MHz CLK of LVDS type is pushed out IF non 10MHz TCXO is used, some actions should be performed in order to make NT1065 perform properly.
+\end{itemize}
+\\
+16.368 MHz TCXO: 
+\begin{itemize}
+\item upload following values to Reg67 and Reg68 (thereafter avoid Reg3 D[1] changing, which will reset TCXO configuration to predefined state): 
+\\ Reg67 xCD 
+\\ Reg68 x8A 
+\item perform PLL A and PLL B (if intended to use) reconfiguration according to section 7.2 to get desired LO frequency 
+\item  execute PLL A and PLL B (if intended to use) auto tuning procedure - Reg43 D[0] and Reg47 D[0] correspondingly 
+\item  execute LPF auto-calibration system - Reg4 D[0].
+\end{itemize}
+\newpage
+\subsection{PLL A/ PLL B RECONFIGURATION }
+In order to reconfigure PLL following procedure is recommended:
+\begin{itemize}
+ \item set Reg41/Reg45 D[1] to desired frequency band 
+\item using the formula: \begin{equation}
+F_L_O =\frac{N∗F_T_C_X_O} {R} 
+\end{equation} choose N and R 
+\item  write N value to Reg42/Reg46 D[7-0] + Reg43/Reg47 D[7] 
+\item write R value to Reg43/Reg47 D[6-3] 
+\item execute tuning procedure - Reg43/Reg47 D[0] 
+\end{itemize}
+PLLs need 1 ms to be locked. 
+
+\subsection{SINGLE LO SOURCE CONFIGURATION }
+In order to switch to single LO mode following actions are to perform: 
+\begin{itemize}
+ \item set Reg3 D[0] to '0' to feed all mixers from PLL A 
+\item turn off PLL B by setting Reg45 D[0] to '0' 
+\item  reconfigure PLL A according to desired frequency plan using Reg41-44 if needed 
+\end{itemize}
+
+\subsection{2-BIT ADC CONFIGURATION }
+After power up NT1065 is preconfigured to analog differential output data interface. However, there is an option to set up 2-bit ADC outputs in Reg15 D[0] for Channel 1 / Reg22 D[0] for Channel2 / Reg29 D[0] for Channel3 / Reg36 D[0] for Channel 4. 2-bit ADCs are able to operate in one of three modes:
+\begin{itemize}
+\item clocked by rising edge; 
+\item clocked by falling edge;  
+\item  asynchronous. 
+\end{itemize}
+\\
+These modes can be set up in Reg19 D[3-2] for Channel1 / Reg26 D[3-2] for Channel2 / Reg33 D[3-2] for Channel3 / Reg40 D[3-2] for Channel4. For ADCs sampling frequency information, please, refer to subsection 7.7. In "asynchronous" mode 2-bit ADCs act as voltage level comparators so no any clocking applied. For example, this mode may be use full if several NT1065s should operate simultaneously pushing out digitized data that can be synchronized with single clock on correlator and processor side
+
+
+\subsection{CLK FREQUENCY CONFIGURATION }
+CLK signal is intended for clocking all 2-bit ADCs as well as clocking external correlator engine. It is generated from LO frequency either from PLL "A" or PLL "B" according to the formula: 
+\begin{equation}
+ F_C_L_K=\frac{F_L_O} {2*C} 
+\end{equation}  CLK sources and frequency can be customized by procedure
+\begin{itemize}
+\item choose CLK source by setting appropriate value to Reg12 D[5] 
+\item  write C value to Reg11 D[4-0] 
+\end{itemize}
+
+\subsection{TEMPERATURE MEASUREMENT PROCEDURE}
+Two modes of temperature modes are available: single and continuous (Reg5 D[1]). In single mode the measurement is done once upon request to Reg5 D[0] by setting '1' and result will be stored in Reg7 D[1-0] + Reg8 D[7-0] after procedure is finished (auto reset to '0' in Reg5 D[0] indicates this) until next execution. One temperature measurement procedure time is up to 17 ms. To enter in continuous mode set Reg5 D[1] to '1' first then execute with Reg5 D[0]. In this case embedded temperature sensor periodically runs the measurement procedure and only the latest result is stored in Reg7 D[1-0] + Reg8 D[7-0]. In order to stop continuous execution Reg5 D[1] should be set to '0'. 
+
+
+\end{document}
