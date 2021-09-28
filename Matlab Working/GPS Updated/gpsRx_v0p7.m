@@ -8,23 +8,23 @@
 %%
 %% Version History: (in reverse chronological order please)
 %%
-%% ver  0.7   13-Apr-2020   Ganesan, T             Added the false alarm and Pdet computation (Pfa Vs threshold, Pdet)
-%%                                                    Modified the Analog, digital beamformer splitting of optimal weights
-%% ver  0.6   10-Apr-2020   Ganesan, T             Fixed the two level detection and threshold based on the ratio of large two peaks
-%% ver  0.5   25-Feb-2020   Ganesan, T             Fixed the initial Wt selection and fixed the fine freq offset loop
+%% ver  0.7   13-Apr-2020   Sudhanshu              Added the false alarm and Pdet computation (Pfa Vs threshold, Pdet)
+%%                                                 Modified the Analog, digital beamformer splitting of optimal weights
+%% ver  0.6   10-Apr-2020   Sudhanshu              Fixed the two level detection and threshold based on the ratio of large two peaks
+%% ver  0.5   25-Feb-2020   Sudhanshu              Fixed the initial Wt selection and fixed the fine freq offset loop
 %%                                                 Added the quantized analog weight computation 
 %%                                                 Added the optimum digital weight computation 
 %% ver  0.4   06-Feb-2020   Ganesan, T             Normalized the initial wts with first or diagonal element to be 1
 %%                                                 Added fine freq estimation using Differential correlation method 
 %% ver  0.3a  21-Jan-2020   Ganesan, T             Added initial(4) orthogonal weights and 
 %%                                                 interference suppression weights
-%% ver  0.3   21-Jan-2020   Ganesan, T             Added RRC filtering in RxSignal.
+%% ver  0.3   21-Jan-2020   Sudhanshu              Added RRC filtering in RxSignal.
 %%                                                 Corrected Elevation angle generation
 %%                                                 Added Jammers (tones)
-%% ver  0.2a  20-Jan-2020   Ganesan, T             Merged latest changes from Ver 0.1
+%% ver  0.2a  20-Jan-2020   Sudhanshu              Merged latest changes from Ver 0.1
 %% ver  0.2   19-Jan-2020   Ganesan, T             Added direction vector for each SV ix Tx and Rx.
 %% ver  0.1   20-Jan-2020   Ganesan, T             Added coherent and non-coherent integration.
-%% ver  0.0   17-Jan-2020   Ganesan, T             Created. Added freq domain and time domain correlation computation.
+%% ver  0.0   17-Jan-2020   Sudhanshu              Created. Added freq domain and time domain correlation computation.
 
 clearvars;  % instead of `clear all'
 close all;
